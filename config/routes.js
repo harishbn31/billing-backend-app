@@ -8,6 +8,11 @@ const {authenticateUser} = require('../app/middlewares/authenticateUser')
 const usersController = require('../app/controllers/usersController')
 const categoriesController = require('../app/controllers/categoriesController')
 const productsController = require('../app/controllers/productsController')
+const billsController = require('../app/controllers/billsController')
+const purchasesController = require('../app/controllers/purchasesController')
+const expendituresController = require('../app/controllers/expendituresController')
+const expenditureTypesController= require('../app/controllers/expenditureTypesController')
+const stocksController= require('../app/controllers/stocksController')
 
 
 router.get('/users', usersController.list)
@@ -28,6 +33,36 @@ router.post('/products', productsController.create)
 router.put('/products/edit/:id', productsController.update)
 router.get('/products/:id', productsController.show)
 router.delete('/products/:id', productsController.delete)
+
+router.get('/bills', billsController.list)
+router.post('/bills', billsController.create)
+router.put('/bills/edit/:id', billsController.update)
+router.get('/bills/:id', billsController.show)
+router.delete('/bills/:id', billsController.delete)
+
+router.get('/purchases', purchasesController.list)
+router.post('/purchases', purchasesController.create)
+router.put('/purchases/edit/:id', purchasesController.update)
+router.get('/purchases/:id', purchasesController.show)
+router.delete('/purchases/:id', purchasesController.delete)
+
+router.get('/expenditures', expendituresController.list)
+router.post('/expenditures', expendituresController.create)
+router.put('/expenditures/edit/:id', expendituresController.update)
+router.get('/expenditures/:id', expendituresController.show)
+router.delete('/expenditures/:id', expendituresController.delete)
+
+router.get('/expenditureTypes', expenditureTypesController.list)
+router.post('/expenditureTypes', expenditureTypesController.create)
+router.put('/expenditureTypes/edit/:id', expenditureTypesController.update)
+router.get('/expenditureTypes/:id', expenditureTypesController.show)
+router.delete('/expenditureTypes/:id', expenditureTypesController.delete)
+
+router.get('/stocks', stocksController.list)
+router.post('/stocks', stocksController.create)
+router.put('/stocks/edit/:id', stocksController.update)
+router.get('/stocks/:id', stocksController.show)
+router.delete('/stocks/:id', stocksController.delete)
 
 
 
