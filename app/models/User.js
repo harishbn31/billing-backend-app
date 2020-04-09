@@ -134,9 +134,11 @@ userSchema.methods.generateToken = function() {
     user.tokens.push({token})
 
     return user.save()
-        .then(userWithToken => {
+        .then(user => {
             const userData = {
-                token
+                token,
+                username: user.username,
+                role: user.role
             }
             return Promise.resolve(userData)
         })

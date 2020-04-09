@@ -40,13 +40,16 @@ class Header extends React.Component {
         return (
         <div className="header">
             
-            {this.props.location.pathname.includes('/businesses') ?
+            {this.props.location.pathname.includes('/') ?
              <>
              <Drawer open={this.state.drawerIsOpen} onClose={() => this.toggleDrawer(false)}>
                 <List>
-                    <ListItem button>
+                    <ListItem button  onClick={() => {
+                        this.toggleDrawer(false)
+                        this.props.history.push(`/stocks`)
+                    }}>
                         <ListItemIcon><AccountBalanceWalletIcon/></ListItemIcon>
-                        <ListItemText primary={'Business'} />
+                        <ListItemText primary={'Stocks'} />
                     </ListItem>
                     
                 </List>
@@ -54,38 +57,52 @@ class Header extends React.Component {
                 <List>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
-                        this.props.history.push(`/businesses/${this.props.user.activeBusiness}/invoices`)
+                        this.props.history.push(`/invoices`)
                     }}>
                         <ListItemIcon><StorefrontIcon/></ListItemIcon>
-                        <ListItemText primary={'Invoices'} />
+                        <ListItemText primary={'Orders/Invoices'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
-                        this.props.history.push(`/businesses/${this.props.user.activeBusiness}/purchases`)
+                        this.props.history.push(`/purchases`)
                     }}>
                         <ListItemIcon><ShoppingBasketIcon/></ListItemIcon>
                         <ListItemText primary={'Purchases'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
-                        this.props.history.push(`/businesses/${this.props.user.activeBusiness}/expenses`)
+                        this.props.history.push(`/expenses`)
                     }}>
                         <ListItemIcon><AccountBalanceWalletIcon/></ListItemIcon>
                         <ListItemText primary={'Expenses'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
-                        this.props.history.push(`/businesses/${this.props.user.activeBusiness}/reports`)
+                        this.props.history.push(`/reports`)
                     }}>
                         <ListItemIcon><ShowChartIcon/></ListItemIcon>
                         <ListItemText primary={'Reports'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
-                        this.props.history.push(`/businesses/${this.props.user.activeBusiness}/teams`)
+                        this.props.history.push(`/products`)
                     }}>
                         <ListItemIcon><PeopleIcon/></ListItemIcon>
-                        <ListItemText primary={'Team'} />
+                        <ListItemText primary={'Products'} />
+                    </ListItem>
+                    <ListItem button  onClick={() => {
+                        this.toggleDrawer(false)
+                        this.props.history.push(`/categories`)
+                    }}>
+                        <ListItemIcon><PeopleIcon/></ListItemIcon>
+                        <ListItemText primary={'Categories'} />
+                    </ListItem>
+                    <ListItem button  onClick={() => {
+                        this.toggleDrawer(false)
+                        this.props.history.push(`/`)
+                    }}>
+                        <ListItemIcon><PeopleIcon/></ListItemIcon>
+                        <ListItemText primary={'About'} />
                     </ListItem>
                 </List>
              </Drawer>
@@ -104,7 +121,7 @@ class Header extends React.Component {
                 {
                     this.props.user.isLoggedIn ? 
                     <div className="headerLinks">
-                    <Link to ="/businesses">Businesses</Link>
+                    <Link to ="/">Details</Link>
                     <Link to ="/user">Settings</Link>
                     <Link to ="/" onClick={() => {this.props.dispatch(startPostUserLogout())}}>Logout</Link>
                     </div>

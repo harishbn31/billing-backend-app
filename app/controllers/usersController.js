@@ -60,7 +60,7 @@ module.exports.login = (req, res) => {
 
 module.exports.checkLoginStatus = (req, res) => {
     // console.log(req.user)
-    if (req.user) res.send(_.pick(req.user, ['username', 'invitedTo']))
+    if (req.user) res.send(_.pick(req.user, ['username',"role"]))
 }
 
 

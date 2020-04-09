@@ -85,7 +85,7 @@ function PurchaseList(props) {
             </Modal>
             <div className='contentHeader'>
             <span className='headerText'>Purchases</span>
-            <Link to={`/businesses/${props.match.params.businessId}/purchases/new`}><IconButton className='tableButton' >
+            <Link to={`/purchases`}><IconButton className='tableButton' >
                 <Add />
             </IconButton>
             </Link>
@@ -111,14 +111,7 @@ function PurchaseList(props) {
 
 const mapStateToProps = (state) => {
     return {
-        orders: state.purchaseOrders.map(order => {
-            const newData = {
-                transactionDate: {date: order.transactionDate, id: order._id},
-                amount: order.quantity * order.rate,
-                qty: order.quantity + ' ' + order.unit
-            }
-            return {...order, ...newData}
-        })
+        orders: []
     }
 }
 

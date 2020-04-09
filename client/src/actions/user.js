@@ -32,7 +32,7 @@ export const startCheckUserAuth = () => {
                 if (response.data.username) {
                     const user = {
                         username: response.data.username,
-                        invitedTo: response.data.invitedTo
+                        role: response.data.role
                     }
                     dispatch(loginUser(user))
                 }
@@ -52,15 +52,15 @@ export const startPostUserLogin = (formData, history) => {
                     const notice = response.data.notice
                     dispatch(failedLogin(notice))
                 } else {
-                    console.log(response)
+                    // console.log(response)
                     const token = response.data.token
                     const user = {
                         username: response.data.userName,
-                        invitedTo: response.data.invitedTo
+                        role: response.data.userName
                     }
                     localStorage.setItem('authToken', token)
                     dispatch(loginUser(user))
-                    history.push('/users')
+                    history.push('/dashboard')
                 }
             })
             .catch(err => {

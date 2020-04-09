@@ -1,15 +1,12 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import userReducer from '../reducers/userReducer'
-import clientsReducer from '../reducers/clientsReducer'
-import purchaseOrdersReducer from '../reducers/purchaseOrdersReducer'
-import suppliersReducer from '../reducers/suppliersReducer'
+import categoryReducer from '../reducers/categoryReducer'
 
 const appReducer = combineReducers({
     user: userReducer,
-    clients: clientsReducer,
-    purchaseOrders: purchaseOrdersReducer,
-    suppliers: suppliersReducer
+    category: categoryReducer
+
 })
 
 const rootReducer = (state, action) => {
