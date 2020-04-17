@@ -4,6 +4,8 @@ import App from './App'
 import {Provider} from 'react-redux'
 import configureStore from './store/configureStore'
 import {startCheckUserAuth} from './actions/user'
+import {getProdcutsList} from './actions/product'
+import {getCategoriesList} from './actions/category'
 
 const store = configureStore()
 
@@ -14,6 +16,8 @@ store.subscribe(() => {
 })
 
 store.dispatch(startCheckUserAuth())
+store.dispatch(getProdcutsList())
+store.dispatch(getCategoriesList())
 
 const jsx = (
     <Provider store={store}>

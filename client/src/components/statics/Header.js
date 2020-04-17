@@ -60,7 +60,7 @@ class Header extends React.Component {
                         this.props.history.push(`/invoices`)
                     }}>
                         <ListItemIcon><StorefrontIcon/></ListItemIcon>
-                        <ListItemText primary={'Orders/Invoices'} />
+                        <ListItemText primary={'Invoices/Bills'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
@@ -99,10 +99,17 @@ class Header extends React.Component {
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
-                        this.props.history.push(`/`)
+                        this.props.history.push(`/dealers`)
                     }}>
                         <ListItemIcon><PeopleIcon/></ListItemIcon>
-                        <ListItemText primary={'About'} />
+                        <ListItemText primary={'Dealers'} />
+                    </ListItem>
+                    <ListItem button  onClick={() => {
+                        this.toggleDrawer(false)
+                        this.props.history.push(`/employees`)
+                    }}>
+                        <ListItemIcon><PeopleIcon/></ListItemIcon>
+                        <ListItemText primary={'Employees'} />
                     </ListItem>
                 </List>
              </Drawer>

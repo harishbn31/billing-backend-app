@@ -5,8 +5,11 @@ const getCategories = (categories) => {
         type: 'CATEGORY_LIST', payload: categories
     }
 }
+export const categoryPost = () =>{
+    return {}
+}
 export const getCategoriesList = () => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         axios.get('/categories')
             .then(response => {
                 // console.log(response)

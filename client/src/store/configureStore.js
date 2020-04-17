@@ -2,10 +2,12 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import userReducer from '../reducers/userReducer'
 import categoryReducer from '../reducers/categoryReducer'
+import productReducer from '../reducers/productReducer'
 
 const appReducer = combineReducers({
     user: userReducer,
-    category: categoryReducer
+    categories: categoryReducer,
+    products: productReducer
 
 })
 

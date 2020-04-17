@@ -15,6 +15,7 @@ import PurchaseList from './components/Purchases/PurchaseList'
 import OrderShow from './components/Purchases/OrderShow'
 import ReportList from './components/Reports/ReportList'
 import CategoriesList from './components/Categories/CategoriesList'
+import ProductsList from './components/Products/ProductsList'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/purchases" component={PurchaseList} />
       <Route path="/categories" component={CategoriesList} />
+      <Route path="/products" component={ProductsList} />
       <Route path="/orders" component={OrderShow} />
       <Route path="/reports" component={ReportList} />
       </Switch>

@@ -30,14 +30,14 @@ module.exports.update = (req, res) => {
     Product.findByIdAndUpdate(id,body,{new:true}).populate('category','name')
         .then(product => {
             // console.log(product)
-            Category.findOne({_id: product.category})
-            .then(category=>{
-                console.log(category)
-                if(!category.products.includes(product._id)){
-                    category.products.push(product._id)
-                    category.save().then(cat=> Promise.resolve()).catch(err => console.log(err))
-                }
-            }).catch(err=>console.log(err))
+            // Category.findOne({_id: product.category})
+            // .then(category=>{
+                // console.log(category)
+            //     if(!category.products.includes(product._id)){
+            //         category.products.push(product._id)
+            //         category.save().then(cat=> Promise.resolve()).catch(err => console.log(err))
+            //     }
+            // }).catch(err=>console.log(err))
             res.json(product)
         }).catch(error=> res.send(error))
 }
