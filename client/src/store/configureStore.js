@@ -3,11 +3,17 @@ import thunk from 'redux-thunk'
 import userReducer from '../reducers/userReducer'
 import categoryReducer from '../reducers/categoryReducer'
 import productReducer from '../reducers/productReducer'
+import allUsersReducer from '../reducers/allUsersReducer'
+import stockReducer from '../reducers/stocksReducer'
+import purchaseReducer from '../reducers/purchaseReducer'
 
 const appReducer = combineReducers({
     user: userReducer,
     categories: categoryReducer,
-    products: productReducer
+    products: productReducer,
+    users: allUsersReducer,
+    stocks: stockReducer,
+    purchases: purchaseReducer
 
 })
 

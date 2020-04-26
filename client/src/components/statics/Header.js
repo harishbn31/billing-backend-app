@@ -11,10 +11,13 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import StorefrontIcon from '@material-ui/icons/Storefront'
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import PeopleIcon from '@material-ui/icons/People';
-
+import CategoryIcon from '@material-ui/icons/Category';
+import ShopIcon from '@material-ui/icons/Shop';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 class Header extends React.Component {
 
     constructor() {
@@ -46,9 +49,16 @@ class Header extends React.Component {
                 <List>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
+                        this.props.history.push(`/dashboard`)
+                    }}>
+                        <ListItemIcon><DashboardIcon/></ListItemIcon>
+                        <ListItemText primary={'Dashboard'} />
+                    </ListItem>
+                    <ListItem button  onClick={() => {
+                        this.toggleDrawer(false)
                         this.props.history.push(`/stocks`)
                     }}>
-                        <ListItemIcon><AccountBalanceWalletIcon/></ListItemIcon>
+                        <ListItemIcon><ShopIcon/></ListItemIcon>
                         <ListItemText primary={'Stocks'} />
                     </ListItem>
                     
@@ -59,7 +69,7 @@ class Header extends React.Component {
                         this.toggleDrawer(false)
                         this.props.history.push(`/invoices`)
                     }}>
-                        <ListItemIcon><StorefrontIcon/></ListItemIcon>
+                        <ListItemIcon><ReceiptIcon/></ListItemIcon>
                         <ListItemText primary={'Invoices/Bills'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
@@ -87,14 +97,14 @@ class Header extends React.Component {
                         this.toggleDrawer(false)
                         this.props.history.push(`/products`)
                     }}>
-                        <ListItemIcon><PeopleIcon/></ListItemIcon>
+                        <ListItemIcon><CategoryIcon/></ListItemIcon>
                         <ListItemText primary={'Products'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
                         this.toggleDrawer(false)
                         this.props.history.push(`/categories`)
                     }}>
-                        <ListItemIcon><PeopleIcon/></ListItemIcon>
+                        <ListItemIcon><CategoryIcon/></ListItemIcon>
                         <ListItemText primary={'Categories'} />
                     </ListItem>
                     <ListItem button  onClick={() => {
@@ -108,19 +118,19 @@ class Header extends React.Component {
                         this.toggleDrawer(false)
                         this.props.history.push(`/employees`)
                     }}>
-                        <ListItemIcon><PeopleIcon/></ListItemIcon>
+                        <ListItemIcon><PeopleOutlineIcon/></ListItemIcon>
                         <ListItemText primary={'Employees'} />
                     </ListItem>
                 </List>
              </Drawer>
              <div className="logo">
                 <MenuIcon onClick={() => this.toggleDrawer(true)}/>
-                <Link to="/businesses"><h1>Expo</h1></Link>
+                <Link to="/businesses"><h3>Expo</h3></Link>
              </div>
              </>
              :
              <div className="logo">
-                <Link to="/"><h1>Expo</h1></Link>
+                <Link to="/"><h3>Expo</h3></Link>
             </div>
             }
             

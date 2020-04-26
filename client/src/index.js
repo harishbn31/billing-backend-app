@@ -6,6 +6,7 @@ import configureStore from './store/configureStore'
 import {startCheckUserAuth} from './actions/user'
 import {getProdcutsList} from './actions/product'
 import {getCategoriesList} from './actions/category'
+import {getUsersList} from './actions/allUsers'
 
 const store = configureStore()
 
@@ -18,6 +19,7 @@ store.subscribe(() => {
 store.dispatch(startCheckUserAuth())
 store.dispatch(getProdcutsList())
 store.dispatch(getCategoriesList())
+store.dispatch(getUsersList())
 
 const jsx = (
     <Provider store={store}>

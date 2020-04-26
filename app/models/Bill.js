@@ -29,7 +29,7 @@ const billSchema = new Schema({
     },
     customer:{
         type: Schema.Types.ObjectId,
-        ref: 'CustomerProfile'
+        ref: 'User'
     },
     total: {
         type: Number,

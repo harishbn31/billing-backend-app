@@ -63,6 +63,7 @@ router.get('/stocks', stocksController.list)
 router.post('/stocks', stocksController.create)
 router.put('/stocks/edit/:id', stocksController.update)
 router.get('/stocks/:id', stocksController.show)
+router.delete('/stocks/deleteAll', stocksController.destroy)
 router.delete('/stocks/:id', stocksController.delete)
 
 

@@ -70,10 +70,10 @@ a {
 .appContent {
     width: 100%;
     min-height: 90vh;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
 }
 
 .loginPanel {

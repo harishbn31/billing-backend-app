@@ -12,10 +12,13 @@ import Register from './components/User/Register'
 import Dashboard from './components/Dashboard'
 
 import PurchaseList from './components/Purchases/PurchaseList'
-import OrderShow from './components/Purchases/OrderShow'
 import ReportList from './components/Reports/ReportList'
 import CategoriesList from './components/Categories/CategoriesList'
 import ProductsList from './components/Products/ProductsList'
+import DealersList from './components/AllUsers/Dealers'
+import EmployeesList from './components/AllUsers/Employees'
+import StocksList from './components/Stocks/stockList'
+
 
 
 function App() {
@@ -24,7 +27,7 @@ function App() {
       <CssBaseline />
       <Header/>
       
-      <div className="appContent">
+      <div className="container">
       
       <Switch>
       <Route path="/" component={Home} exact/>
@@ -34,7 +37,9 @@ function App() {
       <Route path="/purchases" component={PurchaseList} />
       <Route path="/categories" component={CategoriesList} />
       <Route path="/products" component={ProductsList} />
-      <Route path="/orders" component={OrderShow} />
+      <Route path="/dealers" component={DealersList} />
+      <Route path="/employees" component={EmployeesList} />
+      <Route path="/stocks" component={StocksList} />
       <Route path="/reports" component={ReportList} />
       </Switch>
       </div>

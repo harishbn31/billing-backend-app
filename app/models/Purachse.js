@@ -26,7 +26,7 @@ const purchaseSchema = new Schema({
     },
     dealer:{
         type: Schema.Types.ObjectId,
-        ref: 'DealerProfile'
+        ref: 'User'
     },
     invoice:{
         type: String,
@@ -59,19 +59,16 @@ const purchaseSchema = new Schema({
     },
     paymentDetails:{
         type: String
-    },
-    description:{
-        type: String
     }
 })
-purchaseSchema.post('save', function(doc,next){
-    Purchase = this
-    Stock.find({ "_id": {$in: [Purchase.products]}}).then((products)=>{
-        products.map((product)=>{
-            product.quantity += 10
-        })
-    })
-})
+// purchaseSchema.post('save', function(doc,next){
+//     Purchase = this
+//     Stock.find({ "_id": {$in: [Purchase.products]}}).then((products)=>{
+//         products.map((product)=>{
+//             product.quantity += 10
+//         })
+//     })
+// })
 const Purchase = mongoose.model('Purchase', purchaseSchema)
 
 module.exports = Purchase

@@ -2,7 +2,7 @@ const Stock = require('../models/Stock')
 const _ = require('lodash')
 
 module.exports.list = (req, res) => {
-    Stock.find()
+    Stock.find().populate('dealer').populate({'path': 'products.product'})
         .then(stocks => {
             res.json(stocks)
         })
@@ -10,7 +10,7 @@ module.exports.list = (req, res) => {
 module.exports.create = (req, res) => {
     const body = req.body
     const stock = new Stock(body) 
-    purachse.save()
+    stock.save()
         .then(stock => {
             res.json(stock)
         }).catch(error=> res.send(error))
@@ -39,4 +39,9 @@ module.exports.delete = (req, res) => {
         .catch(err => {
             res.json(err)
         })
+}
+module.exports.destroy = (req,res) => {
+    Stock.remove().then(data =>{
+        res.send([])
+    }).catch(err => res.send(err))
 }
