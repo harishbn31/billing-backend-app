@@ -129,8 +129,8 @@ class PurchaseForm extends React.Component {
                             <input className="form-control" placeholder="Quantity" name="quantity" type="number" value={quantity} onChange={this.handleChange}
                         />
                         </div>
-                        <div className="col">
-                            <button className="btn btn-sm btn-info" onClick={this.addToPurchaseList}
+                        <div className="col" style={{'marginTop': "-20px"}}>
+                            <button className="btn btn-sm btn-info"  onClick={this.addToPurchaseList}
                         >Add to Purchase List</button>
                         </div>
                     </div>
@@ -205,7 +205,7 @@ class PurchaseForm extends React.Component {
                             <textarea className="form-control" name="paymentDetails" placeholder="Payment Details" type="text" value={paymentDetails} onChange={this.handleChange}
                             />
                         </div>
-                        <div className="col">
+                        <div className="col" style={{'marginTop': "-20px"}}>
                             <button className="btn btn-primary" >Submit</button>
                         </div>
                     </div>

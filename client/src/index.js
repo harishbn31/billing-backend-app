@@ -4,7 +4,7 @@ import App from './App'
 import {Provider} from 'react-redux'
 import configureStore from './store/configureStore'
 import {startCheckUserAuth} from './actions/user'
-import {getProdcutsList} from './actions/product'
+import {startListProducts} from './actions/product'
 import {getCategoriesList} from './actions/category'
 import {getUsersList} from './actions/allUsers'
 
@@ -17,7 +17,7 @@ store.subscribe(() => {
 })
 
 store.dispatch(startCheckUserAuth())
-store.dispatch(getProdcutsList())
+store.dispatch(startListProducts())
 store.dispatch(getCategoriesList())
 store.dispatch(getUsersList())
 

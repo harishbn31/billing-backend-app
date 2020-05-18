@@ -1,12 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getProdcutsList} from '../../actions/product'
+import {startAddProduct,startRemoveProduct,startUpdateProduct,startListProducts} from '../../actions/product'
 import ProductForm from './ProductForm'
 import Add from '@material-ui/icons/Add'
 import Modal from 'react-modal'
 import modalStyles from '../../config/modalCss'
-import axios from '../../config/axios';
 import IconButton from '@material-ui/core/IconButton';
+import Swal from 'sweetalert2'
+import axios from '../../config/axios';
+
+
 
 class ProductList extends React.Component {
     constructor(props){
@@ -19,22 +22,9 @@ class ProductList extends React.Component {
         
     }
     productDelete = (e) =>{
-        // e.preventDefault()
-        console.log(e.target.value)
         const id=e.target.value
-        // console.log(id)
-        axios.delete(`/products/${id}`)
-        .then(catgeory => {
-            this.props.dispatch(getProdcutsList())
-            
-        })
-        .catch(err =>{
-            console.log(err)
-        })
+        this.props.dispatch(startRemoveProduct(id))
     }
-    // componentDidMount(){
-    //     this.props.dispatch(getProdcutsList())
-    // }
      closeModal = () => {
         this.setState({modalIsOpen : false})
     }
@@ -43,15 +33,7 @@ class ProductList extends React.Component {
     }
     // this.Modal.setAppElement('#root')  
     productPost = (data) =>{
-        axios.post('/products',data)
-        .then(product => {
-            this.closeModal()
-            this.props.dispatch(getProdcutsList())
-            
-        })
-        .catch(err =>{
-            console.log(err)
-        })
+        this.props.dispatch(startAddProduct(data))
     }
     productUpdate = e =>{
         e.preventDefault();
@@ -62,13 +44,7 @@ class ProductList extends React.Component {
     }
     productPut= data =>{
         const id = data._id
-        axios.put(`/products/edit/${id}`,data)
-        .then(response=>{
-            this.setState({
-                product: {}
-            })
-            this.props.dispatch(getProdcutsList())
-        }).catch(err=>console.log(err))
+        this.props.dispatch(startUpdateProduct(id,data,this.props.history))
     }
     handleChange= e =>{
         e.persist()
@@ -80,8 +56,32 @@ class ProductList extends React.Component {
             }
         })
     }
-    
+    updateProduct = (data)=>{
+        // console.log(data)
+        axios.put(`/products/edit/${data._id}`,data,{
+            headers: {
+                'x-auth': localStorage.getItem('authToken')
+            }
+        })
+        .then(res => {
+            if(res.data.errors){
+                Swal.fire({
+                    type: 'error',
+                    text: "Check the fileds"
+                })
+            }else{
+                this.setState({product: {}})
+                this.props.dispatch(startListProducts())
 
+            }
+        })
+        .catch(err => {
+            Swal.fire({
+                type: 'error',
+                text: err
+            })
+        })
+    }
     render(){
        const {modalIsOpen} = this.state
        Modal.setAppElement('#root') 
@@ -108,10 +108,10 @@ class ProductList extends React.Component {
                         return <div key={index}> 
                             <div className="card" style={{width: "18rem"}}>
                             <div className="card-body">
-                                {this.state.product._id === product._id ? <ProductForm productPut={this.productPut} isEdit={this.state.isEdit} {...product}/> : <><h5 className="card-title">{product.name}</h5> 
+                                {this.state.product._id === product._id ? <ProductForm productPut={this.updateProduct} isEdit={this.state.isEdit} {...product}/> : <><h5 className="card-title">{product.name}</h5> 
                                         <p>{product.description}</p>
-                    <p>{product.price}</p>
                     <p>{product.category.name}</p>
+                    <p>{product.price}</p>
                     <button className="btn btn-sm btn-info" id={product._id} onClick={this.productUpdate} >Edit</button>
                                     </>
                                 }
@@ -127,7 +127,9 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    // console.log('state',state)
     return {
+        categories: state.categories,
         products: state.products
     }
 }
