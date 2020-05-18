@@ -12,10 +12,10 @@ app.use(express.json())
 app.use(cors())
 app.use("/api",routes)
 
-// app.use(express.static(path.join(__dirname, 'client/build')))
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/client/build/index.html'))
-// })
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'))
+})
 
 app.listen(port,function(){
     console.log("Listening on port " + port)
