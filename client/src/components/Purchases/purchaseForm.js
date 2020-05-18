@@ -10,7 +10,7 @@ class PurchaseForm extends React.Component {
             name: "",
             price: "",
             quantity: "",
-            date: new Date(),
+            date: '',
             dealer: "",
             invoice: `EXPO-INVOICE`,
             total: '',
@@ -142,7 +142,7 @@ class PurchaseForm extends React.Component {
                                 <input value={product.name} readOnly={true}/>
                                 <input value={product.price} readOnly={true}/>
                                 <input value={product.quantity} readOnly={true}/>
-                                <button className="btn btn-sm btn-danger" onClick={this.removeFromList} id={product._id}>Remove</button>
+                                <button  onClick={this.removeFromList} id={product._id}>Remove</button>
                             </div>
                         })}
                     <div className="form-row">
@@ -205,8 +205,12 @@ class PurchaseForm extends React.Component {
                             <textarea className="form-control" name="paymentDetails" placeholder="Payment Details" type="text" value={paymentDetails} onChange={this.handleChange}
                             />
                         </div>
+                        
                         <div className="col" style={{'marginTop': "-20px"}}>
                             <button className="btn btn-primary" >Submit</button>
+                        </div>
+                        <div className="col">
+
                         </div>
                     </div>
             </form>
