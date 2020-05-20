@@ -71,6 +71,19 @@ class PurchaseForm extends React.Component {
         e.preventDefault()
         const {products,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} = this.state
         this.props.handleSubmit({products,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} )
+        this.setState({
+            products: [],
+            date: '',
+            dealer: "",
+            invoice: `EXPO-INVOICE`,
+            total: '',
+            discount: "",
+            tax: "",
+            otherCharges: "",
+            payMode: "",
+            totalAmount: "",
+            paymentDetails: ""
+        })
     }
     taxBlur= (e)=>{
         const amount= this.state.products.map(p => p.price*p.quantity).reduce((a,b)=> {return a+b},0)
