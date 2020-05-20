@@ -7,6 +7,7 @@ import {startCheckUserAuth} from './actions/user'
 import {startListProducts} from './actions/product'
 import {getCategoriesList} from './actions/category'
 import {getUsersList} from './actions/allUsers'
+import {getPurchasesList} from './actions/purchase'
 
 const store = configureStore()
 
@@ -19,6 +20,7 @@ store.subscribe(() => {
 store.dispatch(startCheckUserAuth())
 store.dispatch(startListProducts())
 store.dispatch(getCategoriesList())
+store.dispatch(getPurchasesList())
 store.dispatch(getUsersList())
 
 const jsx = (

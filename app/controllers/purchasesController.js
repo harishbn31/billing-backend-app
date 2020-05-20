@@ -2,7 +2,7 @@ const Purachse = require('../models/Purachse')
 const _ = require('lodash')
 
 module.exports.list = (req, res) => {
-    Purachse.find()
+    Purachse.find().populate('products')
         .then(purachses => {
             res.json(purachses)
         })

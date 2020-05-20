@@ -30,23 +30,27 @@ const purchaseSchema = new Schema({
     },
     invoice:{
         type: String,
-        default: `Expo-${Date.now()}`
+        required: true
     },
     total: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     discount: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     tax: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     otherCharges: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     totalAmount: {
         type: Number,
@@ -55,7 +59,8 @@ const purchaseSchema = new Schema({
     payMode: {
         type: String,
         enum: ['Net-Banking','Cash','UPI','Cheque'],
-        required: true
+        required: true,
+        default: "Cash"
     },
     paymentDetails:{
         type: String

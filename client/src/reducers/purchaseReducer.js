@@ -3,6 +3,9 @@ const purchaseReducer = (state = [], action) => {
         case 'PURCHASES_LIST': {
             return [...action.payload]
         }
+        case 'ADD_PURCHASE': {
+            return [...state, action.payload]
+        }
         default: {
             return state
         }

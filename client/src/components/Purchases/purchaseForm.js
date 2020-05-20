@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 // import Add from '@material-ui/icons/Add'
+// import Select from 'react-select';
+
 class PurchaseForm extends React.Component {
     constructor(props){
         super(props);
@@ -22,26 +24,13 @@ class PurchaseForm extends React.Component {
             paymentDetails: ""
         }
     }
-    handleSubmit=(e) => {
-        e.preventDefault()
-        // console.log(this.state)
-
-
-    }
+    
     handleChange= (e) => {
         // e.persist()
         this.setState({
             [e.target.name] : e.target.value
         })
     }
-    // addProduct = e =>{
-    //     e.preventDefault()
-    //     this.setState((prevState) => {
-    //         return {
-    //             products: [...prevState.products, {product: "", price:"",quantity:"" }]
-    //         }
-    //     })
-    // }
     productChange = e =>{
     const product = this.props.products.find(product => product._id === e.target.value)
         this.setState((prevState)=>{
@@ -51,48 +40,21 @@ class PurchaseForm extends React.Component {
         })
 
     }
-    // productHandleChange = e =>{
-    //     // console.log(e.target.name)
-    //     e.persist()
-    //     this.setState({
-    //                 [e.target.name]: e.target.value 
-    //         })
-    // }
     addToPurchaseList = e =>{
         e.preventDefault()
-        this.setState((prevState) => {
-            return{
-                products: [...prevState.products, {_id: this.state._id,price: this.state.price, quantity: this.state.quantity,name: this.state.name}],
-                _id: "",
-                price: "",
-                quantity: 1,
-                total: Number(prevState.total) + (Number(this.state.price) * Number(this.state.quantity))
-            }
-        })
+        if(this.state._id){
+            this.setState((prevState) => {
+                return{
+                    products: [...prevState.products, {_id: this.state._id,price: this.state.price, quantity: this.state.quantity,name: this.state.name}],
+                    _id: "",
+                    price: "",
+                    quantity: "",
+                    total: Number(prevState.total) + (Number(this.state.price) * Number(this.state.quantity)),
+                    totalAmount: Number(prevState.total) + (Number(this.state.price) * Number(this.state.quantity))
+                }
+            })
+        }
     }
-    // editFromList = e =>{
-    //     e.preventDefault()
-    //     const product = this.state.products.find(product => product._id === e.target.id)
-    //     this.setState({
-    //         _id: product._id,
-    //         price: product.price,
-    //         quantity: product.quantity,
-    //         isEdit:true
-    //     })
-    // }
-    // updateEditList = e =>{
-    //     e.preventDefault()
-    //     const product = this.state.products.find(product => product._id === e.target.id)
-    //     product.price = this.state.price
-    //     product.qunatity = this.state.qunatity
-    //     this.setState((prevState) => {
-    //         return{
-    //             products: [...prevState.products.filter(product => product._id !== e.target.id), product]
-    //         }
-    //     })
-
-
-    // }
     removeFromList = e =>{
         e.preventDefault()
         const id = e.target.id
@@ -104,6 +66,33 @@ class PurchaseForm extends React.Component {
             }
         })
 
+    }
+    handleSubmit=(e) => {
+        e.preventDefault()
+        const {products,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} = this.state
+        this.props.handleSubmit({products,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} )
+    }
+    taxBlur= (e)=>{
+        const amount= this.state.products.map(p => p.price*p.quantity).reduce((a,b)=> {return a+b},0)
+        this.setState((prevState)=> {
+            return {total: Number(amount) + Number(amount) * Number(this.state.tax) /100, 
+                totalAmount: Number(amount) + Number(amount) * Number(this.state.tax) /100
+            }
+        })
+    }
+    discountBlur = (e)=>{
+        this.setState((prevState)=>{
+            return {
+                totalAmount: Number(prevState.totalAmount) - Number(prevState.total) * Number(prevState.discount) / 100 
+            }
+        })
+    }
+    otherChargesBlur = e =>{
+        this.setState((prevState)=>{
+            return {
+                totalAmount: Number(prevState.totalAmount) + Number(prevState.otherCharges)
+            }
+        })
     }
     render(){
         // console.log('cat',this.state)
@@ -164,7 +153,7 @@ class PurchaseForm extends React.Component {
                             />
                         </div>
                         <div className="col">
-                            <input className="form-control" name="tax" placeholder="Tax" type="text" value={tax} onChange={this.handleChange}
+                            <input className="form-control" name="tax" placeholder="Tax" type="text" value={tax} onChange={this.handleChange} onBlur={this.taxBlur}
                             />
                         </div>
                         
@@ -172,16 +161,17 @@ class PurchaseForm extends React.Component {
                     </div>
                     <br />
                     <div className="form-row">
-                        <div className="col">
-                            <input className="form-control" name="otherCharges" placeholder="Other Charges" type="number" value={otherCharges} onChange={this.handleChange}
-                            />
-                        </div>
+                        
                         <div className="col">
                             <input className="form-control" name="total" placeholder="Total" type="text" value={total} onChange={this.handleChange}
                             />
                         </div>
                         <div className="col">
-                            <input className="form-control" name="discount" placeholder="Discount" type="text" value={discount} onChange={this.handleChange}
+                            <input className="form-control" name="discount" placeholder="Discount" type="text" value={discount} onBlur={this.discountBlur} onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="col">
+                            <input className="form-control" name="otherCharges" placeholder="Other Charges" type="number" onBlur={this.otherChargesBlur} value={otherCharges} onChange={this.handleChange}
                             />
                         </div>
                         

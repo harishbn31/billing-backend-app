@@ -12,6 +12,7 @@ import Register from './components/User/Register'
 import Dashboard from './components/Dashboard'
 
 import PurchaseList from './components/Purchases/PurchaseList'
+import PurchaseShow from './components/Purchases/showPurchase'
 import ReportList from './components/Reports/ReportList'
 import CategoriesList from './components/Categories/CategoriesList'
 import ProductsList from './components/Products/ProductsList'
@@ -34,7 +35,8 @@ function App() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/dashboard" component={Dashboard} />
-      <Route path="/purchases" component={PurchaseList} />
+      <Route path="/purchases" component={PurchaseList} exact={true} />
+      <Route path="/purchases/:id" component={PurchaseShow} exact={true}/>
       <Route path="/categories" component={CategoriesList} />
       <Route path="/products" component={ProductsList} />
       <Route path="/dealers" component={DealersList} />

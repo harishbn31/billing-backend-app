@@ -1,11 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getPurchasesList} from '../../actions/purchase'
+import {getPurchasesList,startAddPurchase} from '../../actions/purchase'
 import PurchaseForm from './purchaseForm'
+import { Link } from 'react-router-dom'
 
-class DealersList extends React.Component {
+
+class PurchaseList extends React.Component {
     componentDidMount(){
         this.props.dispatch(getPurchasesList())
+    }
+    handleSubmit= (data)=>{
+        this.props.dispatch(startAddPurchase(data))
     }
 
     render(){
@@ -14,21 +19,16 @@ class DealersList extends React.Component {
             <>
             <h2>Add Purchases</h2>
             {/* <div className="col-md-8"> */}
-            <PurchaseForm />
+            <PurchaseForm handleSubmit={this.handleSubmit}/>
             {/* </div> */}
                 <h2>Purchases </h2>
                 <div className="row">
+                <ul className="list-group">
                     {this.props.purchases.map((purchase,index) => {
-                        return <div key={index}> 
-                            <div className="card" style={{width: "18rem"}}>
-                            <div className="card-body">
-                                <h5 className="card-title">{purchase}</h5> 
-                                        {/* <p>{dealer.description}</p> */}
-                            </div>
-                            </div>
-                        </div>
+                        return <Link key={index} to={`/purchases/${purchase._id}`}><li className="list-group-item">{purchase.invoice}</li></Link>
                     })}
-                    </div>
+                </ul>
+                </div>
             </>
         )
     }
@@ -40,4 +40,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DealersList)
+export default connect(mapStateToProps)(PurchaseList)
