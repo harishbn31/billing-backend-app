@@ -10,7 +10,7 @@ module.exports.list = (req, res) => {
 module.exports.create = (req, res) => {
     const body = req.body
     const expenditure = new Expenditure(body) 
-    category.save()
+    expenditure.save()
         .then(expenditure => {
             res.json(expenditure)
         }).catch(error=> res.send(error))

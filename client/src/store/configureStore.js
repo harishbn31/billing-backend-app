@@ -6,6 +6,8 @@ import productReducer from '../reducers/productReducer'
 import allUsersReducer from '../reducers/allUsersReducer'
 import stockReducer from '../reducers/stocksReducer'
 import purchaseReducer from '../reducers/purchaseReducer'
+import expenseReducer from '../reducers/expenseReducer'
+import expenditureTypesReducer from '../reducers/expenditureTypeReducer'
 
 const appReducer = combineReducers({
     user: userReducer,
@@ -13,8 +15,9 @@ const appReducer = combineReducers({
     products: productReducer,
     users: allUsersReducer,
     stocks: stockReducer,
-    purchases: purchaseReducer
-
+    purchases: purchaseReducer,
+    expenses: expenseReducer,
+    expenditureTypes: expenditureTypesReducer
 })
 
 const rootReducer = (state, action) => {

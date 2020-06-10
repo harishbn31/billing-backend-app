@@ -19,6 +19,8 @@ import ProductsList from './components/Products/ProductsList'
 import DealersList from './components/AllUsers/Dealers'
 import EmployeesList from './components/AllUsers/Employees'
 import StocksList from './components/Stocks/stockList'
+import ExpenseList from './components/Expenses/expensesList'
+import ExpenseShow from './components/Expenses/show-expense'
 
 
 
@@ -43,6 +45,8 @@ function App() {
       <Route path="/employees" component={EmployeesList} />
       <Route path="/stocks" component={StocksList} />
       <Route path="/reports" component={ReportList} />
+      <Route path="/expenses" component={ExpenseList} exact={true} />
+      <Route path="/expenses/:id" component={ExpenseShow} exact={true}/>
       </Switch>
       </div>
     </BrowserRouter>
