@@ -8,6 +8,7 @@ import stockReducer from '../reducers/stocksReducer'
 import purchaseReducer from '../reducers/purchaseReducer'
 import expenseReducer from '../reducers/expenseReducer'
 import expenditureTypesReducer from '../reducers/expenditureTypeReducer'
+import billReducer from '../reducers/billReducer'
 
 const appReducer = combineReducers({
     user: userReducer,
@@ -17,10 +18,11 @@ const appReducer = combineReducers({
     stocks: stockReducer,
     purchases: purchaseReducer,
     expenses: expenseReducer,
-    expenditureTypes: expenditureTypesReducer
+    expenditureTypes: expenditureTypesReducer,
+    bills: billReducer
 })
 
-const rootReducer = (state, action) => {
+export const rootReducer = (state, action) => {
     if(action.type === 'LOGOUT') {
         state = undefined
     }

@@ -2,21 +2,22 @@ import React from 'react'
 import {connect} from 'react-redux'
 // import Add from '@material-ui/icons/Add'
 // import Select from 'react-select';
+import { getStocksList } from './../../actions/stock'
 
-class PurchaseForm extends React.Component {
+class BillForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             products: [],
             _id: "",
-            stock:"",
+            stock: "",
             name: "",
             price: "",
             quantity: "",
             date: '',
-            dealer: "",
-            invoice: `EXPO-INVOICE`,
-            total: '',
+            customer: "",
+            description: "",
+            total: "",
             discount: "",
             tax: "",
             otherCharges: "",
@@ -24,6 +25,9 @@ class PurchaseForm extends React.Component {
             totalAmount: "",
             paymentDetails: ""
         }
+    }
+    componentDidMount() {
+        this.props.dispatch(getStocksList())
     }
     
     handleChange= (e) => {
@@ -34,19 +38,21 @@ class PurchaseForm extends React.Component {
     }
     productChange = e =>{
     const product = this.props.products.find(product => product._id === e.target.value)
+    const stock = this.props.stocks.find(stock => stock.product === product._id);
+    console.log(stock, this.props.stocks);
         this.setState((prevState)=>{
             return {
-                _id: product._id, price: product.price, quantity: 1,name: product.name, stock: product.stock
+                _id: product._id, price: stock.stockPrice, quantity: 1,name: product.name, stock: product.stock
             }
         })
 
     }
-    addToPurchaseList = e =>{
+    addToBillList = e =>{
         e.preventDefault()
         if(this.state._id){
             this.setState((prevState) => {
                 return{
-                    products: [...prevState.products, {product: this.state._id, stock: this.state.stock, price: this.state.price, quantity: this.state.quantity,name: this.state.name}],
+                    products: [...prevState.products, {product: this.state._id,price: this.state.price, quantity: this.state.quantity, stock: this.state.stock, name: this.state.name}],
                     _id: "",
                     price: "",
                     quantity: "",
@@ -71,13 +77,13 @@ class PurchaseForm extends React.Component {
     }
     handleSubmit=(e) => {
         e.preventDefault()
-        const {products,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} = this.state
-        this.props.handleSubmit({products,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} )
+        const {products,date,total,paymentDetails,dealer,tax,description,otherCharges,payMode,discount,totalAmount} = this.state
+        this.props.handleSubmit({products,date,total,paymentDetails,dealer,tax,description,otherCharges,payMode,discount,totalAmount} )
         this.setState({
             products: [],
             date: '',
-            dealer: "",
-            invoice: `EXPO-INVOICE`,
+            customer: "",
+            description: "",
             total: '',
             discount: "",
             tax: "",
@@ -111,7 +117,7 @@ class PurchaseForm extends React.Component {
     }
     render(){
         // console.log('cat',this.state)
-        const {_id,stock,price, quantity,date,total,paymentDetails,dealer,tax,invoice,otherCharges,payMode,discount,totalAmount} = this.state
+        const {_id,price, quantity,date,total,paymentDetails,customer,tax,description,otherCharges,payMode,discount,totalAmount} = this.state
         return (
             <>  
             <form onSubmit={this.handleSubmit}>
@@ -134,8 +140,8 @@ class PurchaseForm extends React.Component {
                         />
                         </div>
                         <div className="col" style={{'marginTop': "-20px"}}>
-                            <button className="btn btn-sm btn-info"  onClick={this.addToPurchaseList}
-                        >Add to Purchase List</button>
+                            <button className="btn btn-sm btn-info"  onClick={this.addToBillList}
+                        >Add to Bill List</button>
                         </div>
                     </div>
                     {/* <Add onClick={this.addProduct}/> */}
@@ -155,16 +161,16 @@ class PurchaseForm extends React.Component {
                             />
                         </div>
                         <div className="col">
-                        <select className="form-control " name="dealer" placeholder="Dealer" type="text" value={dealer} onChange={this.handleChange}
+                        <select className="form-control " name="customer" placeholder="Customer" type="text" value={customer} onChange={this.handleChange}
                         >
-                            <option value="">Select Dealer</option>
-                            {this.props.dealers.map(dealer =>{
-                                return <option key={ dealer._id} value={dealer._id}>{dealer.username}</option>
+                            <option value="">Select Customer</option>
+                            {this.props.customers.map(customer =>{
+                                return <option key={ customer._id} value={customer._id}>{customer.username}</option>
                             })}
                         </select>
                         </div>
                         <div className="col">
-                            <input className="form-control" name="invoice" placeholder="Invoice" type="text" value={invoice} onChange={this.handleChange}
+                            <input className="form-control" name="description" placeholder="description" type="text" value={description} onChange={this.handleChange}
                             />
                         </div>
                         <div className="col">
@@ -226,8 +232,9 @@ class PurchaseForm extends React.Component {
 const mapStateToProps = (state) => {
     return {
         products: state.products,
-        dealers: state.users
+        customers: state.users,
+        stocks: state.stocks
     }
 }
 
-export default connect(mapStateToProps)(PurchaseForm)
+export default connect(mapStateToProps)(BillForm)

@@ -1,27 +1,90 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getStocksList} from '../../actions/stock'
+import { startListProducts } from '../../actions/product'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Edit from '@material-ui/icons/Edit'
+import StockForm from './StockForm'
+import Swal from 'sweetalert2'
+import axios from '../../config/axios';
 
 class StocksList extends React.Component {
+    constructor(props){
+        super(props)
+        this.state= {
+            stock: {}
+        }
+        
+    }
     componentDidMount(){
         this.props.dispatch(getStocksList())
+        this.props.dispatch(startListProducts())
     }
+    edit = (id) =>{
+        this.setState({
+            stock: this.props.stocks.find(stock => stock._id === id)
+        })
+    }
+    updateStock = (data)=>{
+        console.log(data)
+        axios.put(`/stocks/edit/${data._id}`,data,{
+            headers: {
+                'x-auth': localStorage.getItem('authToken')
+            }
+        })
+        .then(res => {
+            if(res.data.errors){
+                Swal.fire({
+                    type: 'error',
+                    text: "Check the fileds"
+                })
+            }else{
+                this.setState({stock: {}})
+                this.props.dispatch(getStocksList())
 
+            }
+        })
+        .catch(err => {
+            Swal.fire({
+                type: 'error',
+                text: err
+            })
+        })
+    }
     render(){
-        console.log(this.props.stocks)
+        const { stocks, products } = this.props;
         return (
             <>
                 <h3>Stocks </h3>
                 <div className="row">
-                    {this.props.stocks.map((stock,index) => {
+                    {stocks.map((stock,index) => {
                         return <div key={index}> 
                             <div className="card" style={{width: "18rem"}}>
                             <div className="card-body">
-                    <h5 className="card-title">Stocks</h5> 
-                        {/* {stock.products.map((product,index)=>{
-                            return <p key={product._id}>Name: {product.product.name}, Stock Price: {product.stockPrice}, Quantity: {product.quantity}</p>
-
-                        })} */}
+                            <h5 className="card-title">
+                                {products.find(product => product._id === stock.product).name} 
+                                <span>
+                                <IconButton className='tableButton' onClick={()=>this.edit(stock._id)}>
+                                    <Edit />
+                                </IconButton>
+                                </span>
+                            </h5>
+                            {this.state.stock._id === stock._id ?<StockForm stockPut={this.updateStock} stocks={stocks} quantity={stock.quantity} stockPrice={stock.stockPrice} _id={stock._id}/> :
+                            <List>
+                            <ListItem>
+                                <ListItemText primary="Quantity" secondary={stock.quantity} />
+                            </ListItem>
+                            <Divider variant="inset" component="li"/>
+                            <ListItem>
+                                <ListItemText primary="Stock Price" secondary={stock.stockPrice} />
+                            </ListItem>
+                            <Divider variant="inset" component="li"/>
+                            </List>
+                    }
                             </div>
                             </div>
                         </div>
@@ -34,7 +97,8 @@ class StocksList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        stocks: state.stocks
+        stocks: state.stocks,
+        products: state.products
     }
 }
 

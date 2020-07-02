@@ -25,7 +25,7 @@ class ProductList extends React.Component {
         const id=e.target.value
         this.props.dispatch(startRemoveProduct(id))
     }
-     closeModal = () => {
+    closeModal = () => {
         this.setState({modalIsOpen : false})
     }
     modalOpen = () =>{
@@ -110,7 +110,7 @@ class ProductList extends React.Component {
                             <div className="card-body">
                                 {this.state.product._id === product._id ? <ProductForm productPut={this.updateProduct} isEdit={this.state.isEdit} {...product}/> : <><h5 className="card-title">{product.name}</h5> 
                                         <p>{product.description}</p>
-                    <p>{product.category.name}</p>
+                    <p>{product.name}</p>
                     <p>{product.price}</p>
                     <button className="btn btn-sm btn-info" id={product._id} onClick={this.productUpdate} >Edit</button>
                                     </>

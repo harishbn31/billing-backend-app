@@ -65,6 +65,7 @@ const mapStateToProps = (state,props) => {
                     return exp
                 }
             }
+            return null;
         })
     }
 }

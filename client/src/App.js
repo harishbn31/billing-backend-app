@@ -21,6 +21,8 @@ import EmployeesList from './components/AllUsers/Employees'
 import StocksList from './components/Stocks/stockList'
 import ExpenseList from './components/Expenses/expensesList'
 import ExpenseShow from './components/Expenses/show-expense'
+import BillShow from './components/Bills/showBill'
+import BillList from './components/Bills/billList'
 
 
 
@@ -47,6 +49,8 @@ function App() {
       <Route path="/reports" component={ReportList} />
       <Route path="/expenses" component={ExpenseList} exact={true} />
       <Route path="/expenses/:id" component={ExpenseShow} exact={true}/>
+      <Route path="/invoices" component={BillList} exact={true} />
+      <Route path="/invoices/:id" component={BillShow} exact={true}/>
       </Switch>
       </div>
     </BrowserRouter>

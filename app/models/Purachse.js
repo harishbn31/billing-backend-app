@@ -10,6 +10,10 @@ const purchaseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Product' 
         },
+        stock: {
+            type: Schema.Types.ObjectId,
+            ref: 'Stock' 
+        },
         quantity: {
             type: Number,
             default: 1

@@ -1,5 +1,6 @@
 import axios from '../config/axios'
 import Swal from 'sweetalert2'
+import { startAddStock } from './stock'
 
 
 const getProducts = (products) => {
@@ -51,7 +52,14 @@ export const startAddProduct = (data) => {
                     text: "Check the fileds"
                 })
             }else{
-                dispatch(addProduct(res.data))
+                const product = res.data;
+                dispatch(addProduct(product))
+                console.log('dsasd', product);
+                const stock = {}
+                stock.product = product._id;
+                stock.quantity = 0;
+                stock.stockPrice = 0;
+                dispatch(startAddStock(stock, product))
             }
         })
         .catch(err => {

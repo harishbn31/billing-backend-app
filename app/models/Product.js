@@ -18,11 +18,16 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category'
     },
+    stock: {
+        type: Schema.Types.ObjectId,
+        ref: 'Stock'
+    },
     price: {
         type: Number,
         required: true,
         default: 0
-    }
+    },
+
 })
 const Product = mongoose.model('Product', productSchema)
 

@@ -1,36 +1,35 @@
 import axios from '../config/axios'
 import Swal from 'sweetalert2'
-import { UpdateStockQtyPurchase } from './stock'
+import { UpdateStockQtySell } from './stock'
 
-const getPurchase = (purchases) => {
+const getBill = (bills) => {
     return {
-        type: 'PURCHASES_LIST', payload: purchases
+        type: 'BILLS_LIST', payload: bills
     }
 }
-const addPurchase=(purchase)=>{
+const addBill=(bill)=>{
     return {
-        type: "ADD_PURCHASE", payload: purchase
+        type: "ADD_BILL", payload: bill
     }
 }
-
-export const getPurchasesList = () => {
+export const getBillsList = () => {
     return (dispatch) => {
-        axios.get('/purchases')
+        axios.get('/bills')
             .then(response => {
                 // console.log(response)
                 if (response.data) {
-                    dispatch(getPurchase(response.data))
+                    dispatch(getBill(response.data))
                 }
             })
             .catch(err => {
-                console.log('error purchases', err)
+                console.log('error bills', err)
                 // history.push('/')
             })
     }
 }
-export const startAddPurchase = (data) => {
+export const startAddBill = (data) => {
     return (dispatch) => {
-        axios.post('/purchases',data)
+        axios.post('/bills',data)
             .then(response => {
                 // console.log(response)
                 if(response.data.errors){
@@ -39,13 +38,14 @@ export const startAddPurchase = (data) => {
                         text: "Check the fileds"
                     })
                 }else{
-                    const purchase = response.data;
-                    dispatch(addPurchase(purchase));
-                    purchase.products.map( product => {
+                    const bill = response.data;
+                    dispatch(addBill(bill))
+                    bill.products.map( product => {
                         const data = {};
                         data.quantity = product.quantity;
-                        dispatch(UpdateStockQtyPurchase(product.stock, data))
+                        dispatch(UpdateStockQtySell(product.stock, data))
                     })
+    
                 }
             })
             .catch(err => {
