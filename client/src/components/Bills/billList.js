@@ -25,7 +25,7 @@ class BillList extends React.Component {
                 <div className="row">
                 <ul className="list-group">
                     {this.props.bills.map((bill,index) => {
-                        return <Link key={index} to={`/invoices/${bill._id}`}><li className="list-group-item">{bill.description}</li></Link>
+                        return <Link key={index} to={`/invoices/${bill._id}`}><li className="list-group-item">{bill.billId}</li></Link>
                     })}
                 </ul>
                 </div>

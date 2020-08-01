@@ -93,8 +93,8 @@ class ProductList extends React.Component {
                 isOpen={modalIsOpen}
                 // onAfterOpen={this.afterOpenModal}
                 onRequestClose={this.closeModal}
-                aria-labelledby="Create Product"
-                aria-describedby="simple-modal-description"
+                aria-labeledBy="Create Product"
+                aria-describedBy="simple-modal-description"
             >
                 <ProductForm productPost={this.productPost}/>
             </Modal>

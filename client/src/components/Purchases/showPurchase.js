@@ -1,41 +1,80 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {getPurchasesList} from '../../actions/purchase'
+import { connect } from 'react-redux'
+import { getPurchasesList } from '../../actions/purchase'
+import moment from 'moment'
 
-
-class PurchaseShow extends React.Component {
-    componentDidMount(){
-        this.props.dispatch(getPurchasesList())
-    }
-
-    render(){
-        // console.log(this.props.dealers)
-       const purchase = this.props.purchase
-        return (
-            <>
-            <h2>Purchase Info</h2>
-                <div className="row">
-                    <div className="section">
-                        { purchase && 
-                          <><p>{ purchase.date}</p>
-                          <p>{ purchase.invoice}</p>
-                          <ul>
-                              {purchase.products.map((product,index)=>{
-                                  return <li key={index}>{product.name}</li>
-                              })}
-                          </ul></>
-                        }
-                    </div>
-                </div>
-            </>
-        )
-    }
+function Tabular(props){
+  const { data } = props
+  return (
+      <div>
+          <table border='1'>
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>total</th>
+                  </tr>
+              </thead>
+              <tbody>{
+                  data.map((product,i) => {
+                      return (<tr key={product.product._id}>
+                          <td>{i+1}</td>
+                          <td>{product.product.name}</td>
+                          <td>{product.product.description}</td>
+                          <td>{product.quantity}</td>
+                          <td>{product.price}</td>
+                          <td>{product.price*product.quantity}</td>
+                      </tr>)
+                  })
+              }
+              </tbody>
+          </table>
+      </div>
+  )
 }
 
-const mapStateToProps = (state,props) => {
-    return {
-        purchase: state.purchases.find(p => p._id===props.match.params.id)
-    }
+class PurchaseShow extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(getPurchasesList())
+  }
+
+  render() {
+    console.log(this.props.purchase)
+    const purchase = this.props.purchase
+    return (
+      <>
+        <h2>Purchase Info</h2>
+        <div className='row'>
+          <div className='section'>
+            {purchase && (
+              <>
+                <h5>
+                  <u>{purchase.invoice} - {moment(purchase.date).format('LLL')}</u>
+                </h5>
+                <Tabular data={purchase.products} />
+                <br/>
+                <p>discount {purchase.discount} %</p>
+                <p>tax {purchase.tax} %</p>
+                <p>Total :{purchase.total}</p>
+                <p> payMode: {purchase.payMode}</p>
+                <p> Other charges: {purchase.otherCharges}</p>
+                <p> Grand Total: {purchase.totalAmount}</p>
+              </>
+            )}
+          </div>
+        </div>
+      </>
+    )
+  }
+}
+
+const mapStateToProps = (state, props) => {
+  return {
+    purchase: state.purchases.find((p) => p._id === props.match.params.id),
+  }
 }
 
 export default connect(mapStateToProps)(PurchaseShow)
