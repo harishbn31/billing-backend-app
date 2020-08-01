@@ -56,12 +56,14 @@ class PurchaseShow extends React.Component {
                 </h5>
                 <Tabular data={purchase.products} />
                 <br/>
-                <p>discount {purchase.discount} %</p>
-                <p>tax {purchase.tax} %</p>
-                <p>Total :{purchase.total}</p>
-                <p> payMode: {purchase.payMode}</p>
-                <p> Other charges: {purchase.otherCharges}</p>
-                <p> Grand Total: {purchase.totalAmount}</p>
+                <div className='detailContain'>
+                  <p>tax: {purchase.tax}%</p>
+                  <p>Other charges: {purchase.otherCharges}</p>
+                  <p>Total: {purchase.total}</p>
+                  <p>discount: {purchase.discount}%</p>
+                  <p>payMode: {purchase.payMode}</p>
+                  <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {purchase.totalAmount}</p>
+                </div>
               </>
             )}
           </div>

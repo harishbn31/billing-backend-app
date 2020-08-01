@@ -44,6 +44,7 @@ export const startAddBill = (data) => {
                         const data = {};
                         data.quantity = product.quantity;
                         dispatch(UpdateStockQtySell(product.stock, data))
+                        return null
                     })
     
                 }

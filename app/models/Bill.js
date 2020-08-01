@@ -29,7 +29,7 @@ const billSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     },
     customer:{
         type: Schema.Types.ObjectId,

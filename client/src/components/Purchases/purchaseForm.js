@@ -162,7 +162,6 @@ class PurchaseForm extends React.Component {
     // console.log('cat',this.state)
     const {
       _id,
-      stock,
       price,
       quantity,
       date,

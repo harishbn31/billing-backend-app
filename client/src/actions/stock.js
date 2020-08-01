@@ -147,3 +147,31 @@ export const UpdateStockQtySell = (id,data,history) => {
         })
     }
 }
+
+export const startRemoveStock = (id) => {
+    return (dispatch) => {
+        axios.delete(`/stocks/${id}`,{
+            headers: {
+                'x-auth': localStorage.getItem('authToken')
+            }
+        })
+        .then(res => {
+            if(res.data.errors){
+                Swal.fire({
+                    type: 'error',
+                    text: "Check the fields"
+                })
+            }else{
+                const stock = res.data;
+                dispatch(removeStock(stock));
+            }
+        })
+        .catch(err => {
+            Swal.fire({
+                type: 'error',
+                text: err
+            })
+            
+        })
+    }
+}

@@ -20,7 +20,7 @@ function Tabular(props){
                 </thead>
                 <tbody>{
                     data.map((product,i) => {
-                        return (<tr key={product.product._id}>
+                        return (<tr key={i}>
                             <td>{i+1}</td>
                             <td>{product.product.name}</td>
                             <td>{product.product.description}</td>
@@ -55,12 +55,14 @@ class BillShow extends React.Component {
                           <p> Description - { bill.description}</p>
                           <Tabular data={bill.products} />
                           <br/>
-                          <p>discount {bill.discount} %</p>
-                          <p>tax {bill.tax} %</p>
-                          <p>Total :{bill.total}</p>
-                          <p> payMode: {bill.payMode}</p>
-                          <p> Other charges: {bill.otherCharges}</p>
-                          <p> Grand Total: {bill.totalAmount}</p>
+                          <div className="detailContain">
+                            <p>tax: {bill.tax}%</p>
+                            <p>Other charges: {bill.otherCharges}</p>
+                            <p>Total: {bill.total}</p>
+                            <p>discount: {bill.discount}%</p>
+                            <p>payMode: {bill.payMode}</p>
+                            <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {bill.totalAmount}</p>
+                          </div>
                           </>
                         }
                     </div>

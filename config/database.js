@@ -5,7 +5,9 @@ const CONNECTION_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/bil
 const setupDB = () => {
     mongoose.connect(CONNECTION_URI, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
     })
         .then(() => {
             console.log('connected to db')

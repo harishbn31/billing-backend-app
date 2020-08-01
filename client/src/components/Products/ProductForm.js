@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 class ProductForm extends React.Component {
     constructor(props){
-        super(props);
+        super(props)
         this.state = {
             name: props.name ? props.name : '',
             description: props.description ? props.description  : '',

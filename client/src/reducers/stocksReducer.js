@@ -3,6 +3,9 @@ const stockReducer = (state = [], action) => {
         case 'STOCKS_LIST': {
             return [...action.payload]
         }
+        case 'REMOVE_STOCK': {
+            return state.filter(stock => stock._id !== action.payload._id)
+        }
         default: {
             return state
         }

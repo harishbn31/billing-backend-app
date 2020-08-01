@@ -26,7 +26,7 @@ const purchaseSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     },
     dealer:{
         type: Schema.Types.ObjectId,

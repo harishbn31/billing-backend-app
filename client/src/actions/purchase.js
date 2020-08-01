@@ -45,6 +45,7 @@ export const startAddPurchase = (data) => {
                         const data = {};
                         data.quantity = product.quantity;
                         dispatch(UpdateStockQtyPurchase(product.stock, data))
+                        return null
                     })
                 }
             })

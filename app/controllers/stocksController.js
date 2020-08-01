@@ -32,7 +32,7 @@ module.exports.update = (req, res) => {
 }
 module.exports.delete = (req, res) => {
     const id = req.params.id
-    Stock.findOneAndDelete({"_id": id})
+    Stock.findOneAndDelete({"product": id})
         .then(stock => {
             res.json(stock)
         })

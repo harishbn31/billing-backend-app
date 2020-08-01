@@ -1,6 +1,6 @@
 import axios from '../config/axios'
 import Swal from 'sweetalert2'
-import { startAddStock } from './stock'
+import { startAddStock, startRemoveStock } from './stock'
 
 
 const getProducts = (products) => {
@@ -107,6 +107,7 @@ export const startRemoveProduct = (id) => {
         })
         .then(res => {
             dispatch(removeProduct(res.data._id))
+            dispatch(startRemoveStock(res.data._id))
         })
         .catch(err => {
             Swal.fire({
