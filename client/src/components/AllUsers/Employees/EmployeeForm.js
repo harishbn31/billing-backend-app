@@ -38,7 +38,7 @@ class EmployeeForm extends Component {
             email: ''
         })
         this.props.modalStatus()
-        console.log(fd)
+        //console.log(fd)
     }
     render() {
         const { employeeId, username, password, email, address, phone } = this.state

@@ -27,14 +27,18 @@ class CustomerAdd extends Component {
             name, email, phone, address
         }
         if(isEdit){
-            console.log(this.props.id,'------->IDDDs')
+            //console.log(this.props.id,'------->IDDDs')
             this.props.dispatch(startUpdateCustomer(this.props.id,fd))
             this.props.handleClearEdit()
         }else{
-            this.props.dispatch(startAddCustomer(fd))
-            this.props.modalStatus()
+            if(name === '' || email===''||phone===''){
+                alert('Please fill in the fields')
+            }else {
+                this.props.dispatch(startAddCustomer(fd))
+                this.props.modalStatus()
+            }
         }
-        console.log('SUBMIT-CUSTOMER',this.props.id,fd)
+        //console.log('SUBMIT-CUSTOMER',this.props.id,fd)
         this.setState({
             name: '',
             email:'',

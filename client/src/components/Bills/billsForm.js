@@ -169,7 +169,7 @@ class BillForm extends React.Component {
     })
   }
   render() {
-    console.log('cat',this.state)
+    //console.log('cat',this.state)
     const {
       _id,
       price,
