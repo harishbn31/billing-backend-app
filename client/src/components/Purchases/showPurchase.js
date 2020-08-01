@@ -43,7 +43,7 @@ class PurchaseShow extends React.Component {
   }
 
   render() {
-    console.log(this.props.purchase)
+    //console.log(this.props.purchase)
     const purchase = this.props.purchase
     return (
       <>

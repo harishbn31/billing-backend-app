@@ -30,7 +30,7 @@ export const startListEmployees = () => {
     return (dispatch) => {
         axios.get('/employees')
             .then(response => {
-                console.log(response)
+                //console.log(response)
                 if (response.data) {
                     dispatch(getEmployees(response.data))
                 }
@@ -57,7 +57,7 @@ export const startAddEmployee = (data) => {
             }else{
                 const emp = res.data;
                 dispatch(addEmployee(emp))
-                console.log('EMP-ADDED', emp)
+                //console.log('EMP-ADDED', emp)
             }
         })
         .catch(err => {
@@ -105,7 +105,7 @@ export const startRemoveEmployee = (id) => {
             }
         })
         .then(res => {
-            console.log(res, 'DEL-EMP')
+            //console.log(res, 'DEL-EMP')
             dispatch(removeEmployee(res.data._id))
         })
         .catch(err => {

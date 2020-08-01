@@ -30,7 +30,7 @@ export const startListCustomers = () => {
     return (dispatch) => {
         axios.get('/customers')
             .then(response => {
-                console.log(response)
+                //console.log(response)
                 if (response.data) {
                     dispatch(getCustomers(response.data))
                 }
@@ -57,7 +57,7 @@ export const startAddCustomer = (data) => {
             }else{
                 const cus = res.data;
                 dispatch(addCustomer(cus))
-                console.log('CUS-ADDED', cus)
+                //console.log('CUS-ADDED', cus)
             }
         })
         .catch(err => {
@@ -84,7 +84,7 @@ export const startUpdateCustomer = (id,data) => {
                     text: "Check the fields"
                 })
             }else{
-                console.log(res.data,'UPT-CUS')
+                //console.log(res.data,'UPT-CUS')
                 const upCus = res.data
                 dispatch(updateCustomer(upCus))
             }
@@ -106,7 +106,7 @@ export const startRemoveCustomer = (id) => {
             }
         })
         .then(res => {
-            console.log(res, 'DEL-CUS')
+            //console.log(res, 'DEL-CUS')
             dispatch(removeCustomer(res.data._id))
         })
         .catch(err => {
