@@ -57,16 +57,17 @@ class StocksList extends React.Component {
     }
     render(){
         const { stocks, products } = this.props;
+        console.log(stocks,'<---stock',products)
         return (
             <>
                 <h3>Stocks </h3>
                 <div className="row">
-                    {stocks.map((stock,index) => {
+                    {stocks.length>0 && stocks.map((stock,index) => {
                         return <div key={index}> 
                             <div className="card" style={{width: "18rem"}}>
                             <div className="card-body">
                             <h5 className="card-title">
-                                {products.find(product => product._id === stock.product).name} 
+                                {products.length>0 && products.find(product => product._id === stock.product).name} 
                                 <span>
                                 <IconButton className='tableButton' onClick={()=>this.edit(stock._id)}>
                                     <Edit />
