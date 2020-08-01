@@ -65,7 +65,7 @@ class PurchaseShow extends React.Component {
                   <p>payMode: {purchase.payMode}</p>
                   <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {purchase.totalAmount}</p>
                 </div>
-                <Link to='/invoices'>Back</Link>
+                <Link to='/purchases'>Back</Link>
               </>
             )}
           </div>
