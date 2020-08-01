@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUsersList} from '../../../actions/allUsers'
 import EmployeeForm from './EmployeeForm'
 import Modal from 'react-modal'
 import modalStyles from '../../../config/modalCss'
 import IconButton from '@material-ui/core/IconButton';
 import Add from '@material-ui/icons/Add'
 import { startRemoveEmployee } from '../../../actions/employee'
+import {getUsersList} from '../../../actions/allUsers'
 
 function Tabular(props){
     const { data } = props

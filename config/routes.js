@@ -14,6 +14,7 @@ const expendituresController = require('../app/controllers/expendituresControlle
 const expenditureTypesController= require('../app/controllers/expenditureTypesController')
 const stocksController= require('../app/controllers/stocksController')
 const employeesController= require('../app/controllers/employeesController')
+const customersController= require('../app/controllers/customersController')
 
 
 router.get('/users', usersController.list)
@@ -72,6 +73,12 @@ router.post('/employees', employeesController.create)
 // router.put('/employees/edit/:id', employeesController.update)
 // router.get('/employees/:id', employeesController.show)
 router.delete('/employees/:id', employeesController.delete)
+
+router.get('/customers', customersController.list)
+router.post('/customers', customersController.create)
+router.put('/customers/edit/:id', customersController.update)
+router.get('/customers/:id', customersController.show)
+router.delete('/customers/:id', customersController.delete)
 
 
 

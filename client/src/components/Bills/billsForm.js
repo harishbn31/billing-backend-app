@@ -97,6 +97,7 @@ class BillForm extends React.Component {
     e.preventDefault()
     const {
       products,
+      customer,
       date,
       total,
       paymentDetails,
@@ -111,6 +112,7 @@ class BillForm extends React.Component {
     this.props.handleSubmit({
       products,
       date,
+      customer,
       total,
       paymentDetails,
       dealer,
@@ -275,7 +277,7 @@ class BillForm extends React.Component {
                     {this.props.customers.map((customer) => {
                       return (
                         <option key={customer._id} value={customer._id}>
-                          {customer.username}
+                          {customer.name}
                         </option>
                       )
                     })}
@@ -395,7 +397,7 @@ class BillForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
-    customers: state.users,
+    customers: state.customers,
     stocks: state.stocks,
   }
 }

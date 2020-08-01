@@ -10,6 +10,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import CategoryIcon from '@material-ui/icons/Category';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 function Dashboard(props) {
 
@@ -69,6 +70,12 @@ function Dashboard(props) {
                     }}>
                         <ListItemIcon><PeopleOutlineIcon/></ListItemIcon>
                         <ListItemText primary={'Employees'} />
+                    </ListItem>
+                    <ListItem button  onClick={() => {
+                        props.history.push(`/customers`)
+                    }}>
+                        <ListItemIcon><GroupAddIcon/></ListItemIcon>
+                        <ListItemText primary={'Customers'} />
                     </ListItem>
                 </List>
                 </div>

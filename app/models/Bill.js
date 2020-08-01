@@ -33,7 +33,7 @@ const billSchema = new Schema({
     },
     customer:{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'CustomerProfile'
     },
     total: {
         type: Number,
@@ -65,6 +65,10 @@ const billSchema = new Schema({
     },
     description:{
         type: String
+    },
+    createdAt:{
+        type:Date,
+        default: Date.now
     }
 })
 const Bill = mongoose.model('Bill', billSchema)

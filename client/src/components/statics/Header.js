@@ -18,6 +18,7 @@ import ShopIcon from '@material-ui/icons/Shop';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 class Header extends React.Component {
 
     constructor() {
@@ -120,6 +121,12 @@ class Header extends React.Component {
                     }}>
                         <ListItemIcon><PeopleOutlineIcon/></ListItemIcon>
                         <ListItemText primary={'Employees'} />
+                    </ListItem>
+                    <ListItem button  onClick={() => {
+                        this.props.history.push(`/customers`)
+                    }}>
+                        <ListItemIcon><GroupAddIcon/></ListItemIcon>
+                        <ListItemText primary={'Customers'} />
                     </ListItem>
                 </List>
              </Drawer>

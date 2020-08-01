@@ -3,7 +3,7 @@ const _ = require('lodash')
 
 module.exports.list = (req, res) => {
     Bill.find()
-        .populate('products.product products.stock')
+        .populate('products.product products.stock customer')
         .then(bills => {
             res.json(bills)
         })

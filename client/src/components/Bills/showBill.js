@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getBillsList} from '../../actions/bill'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 function Tabular(props){
     const { data } = props
@@ -52,17 +53,26 @@ class BillShow extends React.Component {
                     <div className="section">
                         { bill && 
                           <><h5><u>{ bill.billId} - {moment(bill.date).format('LLL')}</u></h5>
+                          {bill.customer && (
+                              <div className='billTo'>
+                              <h6>To: {bill.customer.name}</h6>
+                              <p>Email: {bill.customer.email}</p>
+                              <p>Phone: {bill.customer.phone}</p>
+                              <p>Address: {bill.customer.address}</p>
+                            </div>
+                          )}
                           <p> Description - { bill.description}</p>
                           <Tabular data={bill.products} />
                           <br/>
                           <div className="detailContain">
-                            <p>tax: {bill.tax}%</p>
-                            <p>Other charges: {bill.otherCharges}</p>
-                            <p>Total: {bill.total}</p>
-                            <p>discount: {bill.discount}%</p>
-                            <p>payMode: {bill.payMode}</p>
+                            <p>tax: {bill.tax}% </p>
+                            <p>Other charges: {bill.otherCharges} </p>
+                            <p>Total: {bill.total} </p>
+                            <p>discount: {bill.discount}% </p>
+                            <p>payMode: {bill.payMode} </p>
                             <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {bill.totalAmount}</p>
                           </div>
+                          <Link to='/invoices'>Back</Link>
                           </>
                         }
                     </div>

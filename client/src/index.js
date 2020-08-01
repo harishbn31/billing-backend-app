@@ -9,14 +9,15 @@ import {getCategoriesList} from './actions/category'
 import {getUsersList} from './actions/allUsers'
 import {getPurchasesList} from './actions/purchase'
 import { startListEmployees } from './actions/employee'
+import { startListCustomers } from './actions/customer'
 
 const store = configureStore()
 
 // console.log(store.getState(), 'initial state')
 
-store.subscribe(() => {
-    console.log(store.getState())
-})
+// store.subscribe(() => {
+//     console.log(store.getState())
+// })
 
 store.dispatch(startCheckUserAuth())
 store.dispatch(startListProducts())
@@ -24,6 +25,7 @@ store.dispatch(getCategoriesList())
 store.dispatch(getPurchasesList())
 store.dispatch(getUsersList())
 store.dispatch(startListEmployees())
+store.dispatch(startListCustomers())
 
 const jsx = (
     <Provider store={store}>

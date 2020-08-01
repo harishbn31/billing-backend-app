@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getPurchasesList } from '../../actions/purchase'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 function Tabular(props){
   const { data } = props
@@ -64,6 +65,7 @@ class PurchaseShow extends React.Component {
                   <p>payMode: {purchase.payMode}</p>
                   <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {purchase.totalAmount}</p>
                 </div>
+                <Link to='/invoices'>Back</Link>
               </>
             )}
           </div>
