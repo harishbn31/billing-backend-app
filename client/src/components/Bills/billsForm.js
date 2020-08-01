@@ -43,7 +43,7 @@ class BillForm extends React.Component {
     const stock = this.props.stocks.find(
       (stock) => stock.product === product._id
     )
-    console.log(stock, this.props.stocks)
+    //console.log(stock, this.props.stocks)
     this.setState((prevState) => {
       return {
         _id: product._id,

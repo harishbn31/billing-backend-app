@@ -44,7 +44,7 @@ class BillShow extends React.Component {
     }
 
     render(){
-        console.log(this.props.bill)
+        //console.log(this.props.bill)
         const bill = this.props.bill
         return (
             <>
