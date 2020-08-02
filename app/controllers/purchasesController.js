@@ -2,8 +2,7 @@ const Purchase = require('../models/Purachse')
 const Product = require('../models/Product')
 const Stock = require('../models/Stock')
 const _ = require('lodash')
-const { findOne } = require('../models/Stock')
-const { all } = require('../../config/routes')
+const { findOneAndUpdate } = require('../models/Stock')
 
 module.exports.list = (req, res) => {
     Purchase.find().populate('dealer').populate('products.product')
@@ -11,16 +10,20 @@ module.exports.list = (req, res) => {
             res.json(purchases)
         })
 }
-module.exports.create = (req, res) => {
+module.exports.create = async(req, res) => {
     const body = req.body
-    console.log(body.products)
-    let productsPack = []
-    body.products.map(item => {
-        Product.findOne({_id: item.product})
-            .then((product) => {
-                if(product){
-                    console.log(item)
-                    productsPack.concat(item)
+    //console.log(body.products)
+    let dataPack = await Promise.all( 
+        body.products.map(async item => {
+            try{
+                let exist = await Product.findOne({_id: item.product})
+                //console.log(exist)
+                if(exist){
+                    if(!exist.price){
+                        Product.findOneAndUpdate({_id: item.product},{price: item.price})
+                        .then()
+                    }
+                    return item
                 }
                 else{
                     let newProductId, newStockId
@@ -30,23 +33,24 @@ module.exports.create = (req, res) => {
                         price: item.price
                     }
                     const product = new Product(newProduct)
-                    product.save()
-                        .then(listedProduct => {
-                            newProductId=listedProduct._id
-                        }).catch(err => res.json(err))
+                    let saveProduct = await product.save()
+                    newProductId = saveProduct._id
+                    console.log('order2',newProductId)
 
                     let newStock = {
-                        product: item.product,
+                        product: newProductId,
                         quantity: item.quantity,
                         stockPrice: item.price
                     }
                     const stock = new Stock(newStock)
-                    stock.save()
-                        .then(listedStock => {
-                            newStockId=listedStock._id
-                        }).catch(err => res.json(err))
+                    let saveStock = await stock.save()
+                    newStockId = saveStock._id
 
-                    productsPack.concat({
+                    Product.findOneAndUpdate({_id: newProductId},{stock:newStockId})
+                    .then()
+                    console.log('order3',newStockId)
+
+                    return({
                         product: newProductId,
                         stock: newStockId,
                         stockPrice: item.price,
@@ -54,15 +58,23 @@ module.exports.create = (req, res) => {
                         name: item.name
                     })
                 }
-            })
-    })
-    console.log(productsPack,'----->productsPack')
-    // const purchase = new Purchase(body)
-    // purchase.save()
-    //     .then(purchase => {
-    //         res.json(purchase)
-    //     }).catch(error=> res.send(error))
+            }
+            catch(e){
+                console.log(e)
+            }
+        })
+    )
+    console.log(dataPack,'----->productsPack')
+    console.log('=====================================>order last')
+    body.products = dataPack
+    const purchase = new Purchase(body)
+    purchase.save()
+        .then(purchase => {
+            //res.json(purchase)
+            console.log('purchace order 6 ',purchase)
+        }).catch(error=> res.send(error))
 }
+
 module.exports.show = (req, res) => {
     const id= req.params.id
     Purchase.findOne({"_id":id})
