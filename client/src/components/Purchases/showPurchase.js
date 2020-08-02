@@ -37,6 +37,16 @@ function Tabular(props){
   )
 }
 
+function printPageArea(areaID){
+  var printContent = document.getElementById(areaID);
+  var WinPrint = window.open('', '', 'width=900,height=650');
+  WinPrint.document.write(printContent.innerHTML);
+  WinPrint.document.close();
+  WinPrint.focus();
+  WinPrint.print();
+  //WinPrint.close();
+}
+
 class PurchaseShow extends React.Component {
   componentDidMount() {
     this.props.dispatch(getPurchasesList())
@@ -48,7 +58,7 @@ class PurchaseShow extends React.Component {
     return (
       <>
         <h2>Purchase Info</h2>
-        <div className='row'>
+        <div className='row' id='purchase'>
           <div className='section'>
             {purchase && (
               <>
@@ -65,11 +75,13 @@ class PurchaseShow extends React.Component {
                   <p>payMode: {purchase.payMode}</p>
                   <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {purchase.totalAmount}</p>
                 </div>
-                <Link to='/purchases'>Back</Link>
               </>
             )}
           </div>
         </div>
+            <button onClick={() => {printPageArea('purchase')}}>Generate Report</button>
+            <br/>
+            <Link to='/purchases'>Back</Link>
       </>
     )
   }

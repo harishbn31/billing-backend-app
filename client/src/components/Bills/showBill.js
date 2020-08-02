@@ -37,6 +37,15 @@ function Tabular(props){
     )
 }
 
+function printPageArea(areaID){
+    var printContent = document.getElementById(areaID);
+    var WinPrint = window.open('', '', 'width=900,height=650');
+    WinPrint.document.write(printContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+    //WinPrint.close();
+}
 
 class BillShow extends React.Component {
     componentDidMount(){
@@ -49,14 +58,14 @@ class BillShow extends React.Component {
         return (
             <>
             <h2>Bills Info</h2>
-                <div className="row">
+                <div className="row" id='bill'>
                     <div className="section">
                         { bill && 
                           <><h5><u>{ bill.billId} - {moment(bill.date).format('LLL')}</u></h5>
                           {bill.customer && (
                               <div className='billTo'>
-                              <h6>To: {bill.customer.name}</h6>
-                              <p>Email: {bill.customer.email}</p>
+                              <p>To: {bill.customer.name}</p>
+                              <p>email: {bill.customer.email}</p>
                               <p>Phone: {bill.customer.phone}</p>
                               <p>Address: {bill.customer.address}</p>
                             </div>
@@ -72,11 +81,16 @@ class BillShow extends React.Component {
                             <p>payMode: {bill.payMode} </p>
                             <p style={{fontWeight:'bold',fontSize:'medium'}}><em>Grand Total:</em> {bill.totalAmount}</p>
                           </div>
-                          <Link to='/invoices'>Back</Link>
                           </>
                         }
                     </div>
                 </div>
+                        <button onClick={() => {
+                            //window.print()
+                            printPageArea('bill')
+                        }}>Generate Report</button>
+                        <br/>
+                        <Link to='/invoices'>Back</Link>
             </>
         )
     }
