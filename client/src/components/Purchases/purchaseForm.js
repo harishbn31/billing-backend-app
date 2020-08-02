@@ -23,7 +23,17 @@ class PurchaseForm extends React.Component {
       payMode: '',
       totalAmount: '',
       paymentDetails: '',
+      newField: false,
+      tempId: '',
     }
+  }
+
+  generateTempId = () => {
+    this.setState({ tempId: JSON.stringify(Number(Date.now())).substring(0,12) })
+  }
+
+  componentDidMount() {
+    this.generateTempId()
   }
 
   handleChange = (e) => {
@@ -32,22 +42,39 @@ class PurchaseForm extends React.Component {
       [e.target.name]: e.target.value,
     })
   }
+
   productChange = (e) => {
+    console.log(e.target.value)
     const product = this.props.products.find(
       (product) => product._id === e.target.value
     )
-    this.setState((prevState) => {
-      return {
-        _id: product._id,
-        price: product.price,
-        quantity: 1,
-        name: product.name,
-        stock: product.stock,
-      }
-    })
+    if (product) {
+      this.setState((prevState) => {
+        return {
+          _id: product._id,
+          price: product.price,
+          quantity: 1,
+          name: product.name,
+          stock: product.stock,
+          newField: false,
+        }
+      })
+    } else {
+      this.setState((prevState) => {
+        return {
+          _id: this.state.tempId,
+          price: 0,
+          quantity: 1,
+          name: '',
+          stock: 0,
+          newField: true,
+        }
+      })
+    }
   }
   addToPurchaseList = (e) => {
     e.preventDefault()
+    this.generateTempId()
     if (this.state._id) {
       this.setState((prevState) => {
         return {
@@ -65,6 +92,8 @@ class PurchaseForm extends React.Component {
           price: '',
           quantity: '',
           stock: '',
+          name: '',
+          newField: false,
           total:
             Number(prevState.total) +
             Number(this.state.price) * Number(this.state.quantity),
@@ -75,7 +104,7 @@ class PurchaseForm extends React.Component {
       })
     }
   }
-  removeFromList = (e,id) => {
+  removeFromList = (e, id) => {
     e.preventDefault()
     const product = this.state.products.find((p) => p.product === id)
     this.setState((prevState) => {
@@ -187,7 +216,6 @@ class PurchaseForm extends React.Component {
                 value={_id}
                 onChange={this.productChange}
               >
-                {' '}
                 <option>Select Product</option>
                 {this.props.products.map((product, index) => {
                   return (
@@ -196,8 +224,21 @@ class PurchaseForm extends React.Component {
                     </option>
                   )
                 })}
+                <option value={this.state.tempId}>Other</option>
               </select>
             </div>
+            {this.state.newField && (
+              <div className='col'>
+                <input
+                  className='form-control'
+                  placeholder='Product Name'
+                  name='name'
+                  type='text'
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              </div>
+            )}
             <div className='col'>
               <input
                 className='form-control'
@@ -238,7 +279,11 @@ class PurchaseForm extends React.Component {
                     <input value={product.name} readOnly={true} />
                     <input value={product.price} readOnly={true} />
                     <input value={product.quantity} readOnly={true} />
-                    <button onClick={(e)=>{this.removeFromList(e,product.product)}}>
+                    <button
+                      onClick={(e) => {
+                        this.removeFromList(e, product.product)
+                      }}
+                    >
                       Remove
                     </button>
                   </div>

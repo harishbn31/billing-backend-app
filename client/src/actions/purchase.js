@@ -44,7 +44,7 @@ export const startAddPurchase = (data) => {
                     purchase.products.map( product => {
                         const data = {};
                         data.quantity = product.quantity;
-                        dispatch(UpdateStockQtyPurchase(product.stock, data))
+                        //dispatch(UpdateStockQtyPurchase(product.stock, data))
                         return null
                     })
                 }

@@ -1,40 +1,88 @@
-const Purachse = require('../models/Purachse')
+const Purchase = require('../models/Purachse')
+const Product = require('../models/Product')
+const Stock = require('../models/Stock')
 const _ = require('lodash')
+const { findOne } = require('../models/Stock')
+const { all } = require('../../config/routes')
 
 module.exports.list = (req, res) => {
-    Purachse.find().populate('dealer').populate('products.product')
-        .then(purachses => {
-            res.json(purachses)
+    Purchase.find().populate('dealer').populate('products.product')
+        .then(purchases => {
+            res.json(purchases)
         })
 }
 module.exports.create = (req, res) => {
     const body = req.body
-    const purachse = new Purachse(body) 
-    purachse.save()
-        .then(purachse => {
-            res.json(purachse)
-        }).catch(error=> res.send(error))
+    console.log(body.products)
+    let productsPack = []
+    body.products.map(item => {
+        Product.findOne({_id: item.product})
+            .then((product) => {
+                if(product){
+                    console.log(item)
+                    productsPack.concat(item)
+                }
+                else{
+                    let newProductId, newStockId
+                    let newProduct = {
+                        name: item.name,
+                        category: item.category,
+                        price: item.price
+                    }
+                    const product = new Product(newProduct)
+                    product.save()
+                        .then(listedProduct => {
+                            newProductId=listedProduct._id
+                        }).catch(err => res.json(err))
+
+                    let newStock = {
+                        product: item.product,
+                        quantity: item.quantity,
+                        stockPrice: item.price
+                    }
+                    const stock = new Stock(newStock)
+                    stock.save()
+                        .then(listedStock => {
+                            newStockId=listedStock._id
+                        }).catch(err => res.json(err))
+
+                    productsPack.concat({
+                        product: newProductId,
+                        stock: newStockId,
+                        stockPrice: item.price,
+                        quantity: item.quantity,
+                        name: item.name
+                    })
+                }
+            })
+    })
+    console.log(productsPack,'----->productsPack')
+    // const purchase = new Purchase(body)
+    // purchase.save()
+    //     .then(purchase => {
+    //         res.json(purchase)
+    //     }).catch(error=> res.send(error))
 }
 module.exports.show = (req, res) => {
     const id= req.params.id
-    Purachse.findOne({"_id":id})
-        .then(purachse => {
-            res.json(purachse)
+    Purchase.findOne({"_id":id})
+        .then(purchase => {
+            res.json(purchase)
         }).catch(error=> res.send(error))
 }
 module.exports.update = (req, res) => {
     const id= req.params.id
     const body= req.body
-    Purachse.findByIdAndUpdate(id,body,{new:true})
-        .then(purachse => {
-            res.json(purachse)
+    Purchase.findByIdAndUpdate(id,body,{new:true})
+        .then(purchase => {
+            res.json(purchase)
         }).catch(error=> res.send(error))
 }
 module.exports.delete = (req, res) => {
     const id = req.params.id
-    Purachse.findOneAndDelete({"_id": id})
-        .then(purachse => {
-            res.json(purachse)
+    Purchase.findOneAndDelete({"_id": id})
+        .then(purchase => {
+            res.json(purchase)
         })
         .catch(err => {
             res.json(err)

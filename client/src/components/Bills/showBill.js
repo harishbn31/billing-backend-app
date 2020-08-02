@@ -3,12 +3,13 @@ import {connect} from 'react-redux'
 import {getBillsList} from '../../actions/bill'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import html2pdf from 'html2pdf.js'
 
 function Tabular(props){
     const { data } = props
     return (
         <div>
-            <table border='1'>
+            <table border='1' style={{borderCollapse:'collapse'}}>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -44,7 +45,18 @@ function printPageArea(areaID){
     WinPrint.document.close();
     WinPrint.focus();
     WinPrint.print();
-    //WinPrint.close();
+}
+
+function downloadAsPdf(areaID,id){
+    var printContent = document.getElementById(areaID)
+    var opt = {
+        margin:       1,
+        filename:     `invoice-${id}.pdf`,
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 4 },
+        jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(printContent).save()
 }
 
 class BillShow extends React.Component {
@@ -58,7 +70,7 @@ class BillShow extends React.Component {
         return (
             <>
             <h2>Bills Info</h2>
-                <div className="row" id='bill'>
+                <div className="row" id='bill' style={{marginLeft:'60px'}}>
                     <div className="section">
                         { bill && 
                           <><h5><u>{ bill.billId} - {moment(bill.date).format('LLL')}</u></h5>
@@ -85,12 +97,12 @@ class BillShow extends React.Component {
                         }
                     </div>
                 </div>
-                        <button onClick={() => {
-                            //window.print()
-                            printPageArea('bill')
-                        }}>Generate Report</button>
-                        <br/>
-                        <Link to='/invoices'>Back</Link>
+                <button onClick={() => {
+                    printPageArea('bill')
+                }}>Print</button>
+                <button onClick={() => {downloadAsPdf('bill',bill.billId)}}>Download as pdf</button>
+                <br/>
+                <Link to='/invoices'>Back</Link>
             </>
         )
     }

@@ -70,7 +70,7 @@ const billSchema = new Schema({
         type:Date,
         default: Date.now
     }
-})
+},{timestamps: true})
 const Bill = mongoose.model('Bill', billSchema)
 
 module.exports = Bill

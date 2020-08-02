@@ -68,8 +68,12 @@ const purchaseSchema = new Schema({
     },
     paymentDetails:{
         type: String
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
-})
+},{timestamps: true})
 // purchaseSchema.post('save', function(doc,next){
 //     Purchase = this
 //     Stock.find({ "_id": {$in: [Purchase.products]}}).then((products)=>{

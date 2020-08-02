@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { getPurchasesList } from '../../actions/purchase'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import html2pdf from 'html2pdf.js'
 
 function Tabular(props){
   const { data } = props
   return (
       <div>
-          <table border='1'>
+          <table border='1' style={{borderCollapse:'collapse'}}>
               <thead>
                   <tr>
                       <th>#</th>
@@ -44,7 +45,18 @@ function printPageArea(areaID){
   WinPrint.document.close();
   WinPrint.focus();
   WinPrint.print();
-  //WinPrint.close();
+}
+
+function downloadAsPdf(areaID,id){
+  var printContent = document.getElementById(areaID)
+  var opt = {
+      margin:       1,
+      filename:     `invoice-${id}.pdf`,
+      image:        { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 4 },
+      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(printContent).save()
 }
 
 class PurchaseShow extends React.Component {
@@ -58,7 +70,7 @@ class PurchaseShow extends React.Component {
     return (
       <>
         <h2>Purchase Info</h2>
-        <div className='row' id='purchase'>
+        <div className='row' id='purchase' style={{marginLeft:'60px'}}>
           <div className='section'>
             {purchase && (
               <>
@@ -79,9 +91,10 @@ class PurchaseShow extends React.Component {
             )}
           </div>
         </div>
-            <button onClick={() => {printPageArea('purchase')}}>Generate Report</button>
-            <br/>
-            <Link to='/purchases'>Back</Link>
+        <button onClick={() => {printPageArea('purchase')}}>Print</button>
+        <button onClick={() => {downloadAsPdf('purchase',purchase.invoice)}}>Download as pdf</button>
+        <br/>
+        <Link to='/purchases'>Back</Link>
       </>
     )
   }
