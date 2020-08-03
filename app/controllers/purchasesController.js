@@ -64,7 +64,7 @@ module.exports.create = async(req, res) => {
                 }
             }
             catch(e){
-                console.log(e)
+                res.json(e)
             }
         })
     )
@@ -74,7 +74,7 @@ module.exports.create = async(req, res) => {
     purchase.save()
     purchase.populate('products.product')
         .then(purchase => {
-            console.log('purchace order 6 ',purchase)
+            //console.log('purchase ',purchase)
             res.json(purchase)
         }).catch(error=> res.send(error))
 }

@@ -53,7 +53,7 @@ export const startAddPurchase = (data) => {
                         // const data = {};
                         // data.quantity = product.quantity;
                         //dispatch(UpdateStockQtyPurchase(product.stock, data))
-                        dispatch(updateStockFromPurchase(purchase.product))
+                        dispatch(updateStockFromPurchase(product))
                         return null
                     })
                 }
