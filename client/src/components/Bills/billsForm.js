@@ -24,6 +24,7 @@ class BillForm extends React.Component {
       payMode: '',
       totalAmount: '',
       paymentDetails: '',
+      availableStock: '',
     }
   }
   componentDidMount() {
@@ -51,6 +52,7 @@ class BillForm extends React.Component {
         quantity: 1,
         name: product.name,
         stock: product.stock,
+        availableStock: stock.quantity
       }
     })
   }
@@ -184,6 +186,7 @@ class BillForm extends React.Component {
       payMode,
       discount,
       totalAmount,
+      availableStock,
     } = this.state
     return (
       <>
@@ -215,6 +218,16 @@ class BillForm extends React.Component {
                 type='number'
                 value={price}
                 onChange={this.handleChange}
+              />
+            </div>
+            <div className='col'>
+              <input
+                className='form-control'
+                placeholder='Available'
+                name='availableStock'
+                type='number'
+                value={availableStock}
+                readOnly
               />
             </div>
             <div className='col'>

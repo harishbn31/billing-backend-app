@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getStocksList} from '../../actions/stock'
 import { startListProducts } from '../../actions/product'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Edit from '@material-ui/icons/Edit'
 import StockForm from './StockForm'
