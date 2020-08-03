@@ -112,7 +112,7 @@ class ProductList extends React.Component {
             return (
               <div key={index}>
                 <div className='card' style={{ width: '18rem' }}>
-                  <div className='card-body'>
+                  <div className='card-body product-body'>
                     {this.state.product._id === product._id ? (
                       <ProductForm
                         productPut={this.updateProduct}
@@ -120,11 +120,10 @@ class ProductList extends React.Component {
                         {...product}
                       />
                     ) : (
-                      <>
+                      <div className='product-card'>
                         <h5 className='card-title'>{product.name}</h5>
-                        <p>{product.description}</p>
-                        <p>{product.name}</p>
-                        <p>{product.price}</p>
+                        <p>Description: {product.description}</p>
+                        <p><em><b>Price:</b></em> {product.price}</p>
                         <button
                           className='btn btn-sm btn-info'
                           id={product._id}
@@ -132,15 +131,15 @@ class ProductList extends React.Component {
                         >
                           Edit
                         </button>
-                      </>
+                        <button
+                          className='btn btn-sm btn-danger'
+                          value={product._id}
+                          onClick={this.productDelete}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     )}
-                    <button
-                      className='btn btn-sm btn-danger'
-                      value={product._id}
-                      onClick={this.productDelete}
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
               </div>
