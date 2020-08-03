@@ -1,6 +1,7 @@
 import axios from '../config/axios'
 import Swal from 'sweetalert2'
-import { UpdateStockQtyPurchase } from './stock'
+import { startListProducts } from './product'
+//import { getStocksList, UpdateStockQtyPurchase } from './stock'
 
 const getPurchase = (purchases) => {
     return {
@@ -10,6 +11,12 @@ const getPurchase = (purchases) => {
 const addPurchase=(purchase)=>{
     return {
         type: "ADD_PURCHASE", payload: purchase
+    }
+}
+
+const updateStockFromPurchase = (purchase) => {
+    return {
+        type: "PURCHASE_STOCK_UPDATE", payload: purchase 
     }
 }
 
@@ -41,10 +48,12 @@ export const startAddPurchase = (data) => {
                 }else{
                     const purchase = response.data;
                     dispatch(addPurchase(purchase));
+                    dispatch(startListProducts())
                     purchase.products.map( product => {
-                        const data = {};
-                        data.quantity = product.quantity;
+                        // const data = {};
+                        // data.quantity = product.quantity;
                         //dispatch(UpdateStockQtyPurchase(product.stock, data))
+                        dispatch(updateStockFromPurchase(purchase.product))
                         return null
                     })
                 }

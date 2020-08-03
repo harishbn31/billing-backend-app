@@ -2,7 +2,8 @@ const Stock = require('../models/Stock')
 const _ = require('lodash')
 
 module.exports.list = (req, res) => {
-    Stock.find().populate('dealer').populate({'path': 'products.product'})
+    Stock.find()
+        .populate('product')
         .then(stocks => {
             res.json(stocks)
         })

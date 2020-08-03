@@ -12,15 +12,21 @@ module.exports.list = (req, res) => {
 }
 module.exports.create = async(req, res) => {
     const body = req.body
-    //console.log(body.products)
+
     let dataPack = await Promise.all( 
         body.products.map(async item => {
             try{
                 let exist = await Product.findOne({_id: item.product})
-                //console.log(exist)
                 if(exist){
                     if(!exist.price){
                         Product.findOneAndUpdate({_id: item.product},{price: item.price})
+                        .then()
+                        Stock.findOneAndUpdate({product: item.product},{price: item.price})
+                        .then()
+                    }else{
+                        Stock.findOneAndUpdate({product: item.product},{
+                            $inc: { quantity: item.quantity }
+                        })
                         .then()
                     }
                     return item
@@ -35,7 +41,6 @@ module.exports.create = async(req, res) => {
                     const product = new Product(newProduct)
                     let saveProduct = await product.save()
                     newProductId = saveProduct._id
-                    console.log('order2',newProductId)
 
                     let newStock = {
                         product: newProductId,
@@ -48,12 +53,11 @@ module.exports.create = async(req, res) => {
 
                     Product.findOneAndUpdate({_id: newProductId},{stock:newStockId})
                     .then()
-                    console.log('order3',newStockId)
 
                     return({
                         product: newProductId,
                         stock: newStockId,
-                        stockPrice: item.price,
+                        price: item.price,
                         quantity: item.quantity,
                         name: item.name
                     })
@@ -64,14 +68,14 @@ module.exports.create = async(req, res) => {
             }
         })
     )
-    console.log(dataPack,'----->productsPack')
-    console.log('=====================================>order last')
+
     body.products = dataPack
     const purchase = new Purchase(body)
     purchase.save()
+    purchase.populate('products.product')
         .then(purchase => {
-            //res.json(purchase)
             console.log('purchace order 6 ',purchase)
+            res.json(purchase)
         }).catch(error=> res.send(error))
 }
 

@@ -67,25 +67,21 @@ class StocksList extends React.Component {
                             <div className="card" style={{width: "18rem"}}>
                             <div className="card-body">
                             <h5 className="card-title">
-                                {products.length>0 && products.find(product => product._id === stock.product).name} 
+                                {stock.product.name} 
                                 <span>
                                 <IconButton className='tableButton' onClick={()=>this.edit(stock._id)}>
                                     <Edit />
                                 </IconButton>
                                 </span>
                             </h5>
-                            {this.state.stock._id === stock._id ?<StockForm stockPut={this.updateStock} stocks={stocks} quantity={stock.quantity} stockPrice={stock.stockPrice} _id={stock._id}/> :
-                            <List>
-                            <ListItem>
-                                <ListItemText primary="Quantity" secondary={stock.quantity} />
-                            </ListItem>
-                            <Divider variant="inset" component="li"/>
-                            <ListItem>
-                                <ListItemText primary="Stock Price" secondary={stock.stockPrice} />
-                            </ListItem>
-                            <Divider variant="inset" component="li"/>
-                            </List>
-                    }
+                            <div>
+                                {this.state.stock._id === stock._id ?<StockForm stockPut={this.updateStock} stocks={stocks} quantity={stock.quantity} stockPrice={stock.stockPrice} _id={stock._id}/> :
+                                <>
+                                    <p>Quantity:  {stock.quantity}</p>
+                                    <p>Price:  {stock.stockPrice}</p>
+                                </>
+                                }
+                            </div>
                             </div>
                             </div>
                         </div>

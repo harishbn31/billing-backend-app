@@ -6,6 +6,16 @@ const stockReducer = (state = [], action) => {
         case 'REMOVE_STOCK': {
             return state.filter(stock => stock._id !== action.payload._id)
         }
+        case "PURCHASE_STOCK_UPDATE": {
+            return state.map(stock => {
+                if(stock._id === action.payload._id){
+                    return Object.assign({}, stock, action.payload)
+                }
+                else{
+                    return Object.assign({}, stock)
+                }
+            })
+        }
         default: {
             return state
         }
