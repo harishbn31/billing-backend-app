@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import {connect} from 'react-redux'
-import {getBillsList,startAddBill} from '../../actions/bill'
-import BillForm from './billsForm'
+import {getBillsList} from '../../actions/bill'
 import { Link } from 'react-router-dom'
 import FormBill from './FormBill'
 import { Grid } from '@material-ui/core'
@@ -11,14 +10,10 @@ class BillList extends React.Component {
     componentDidMount(){
         this.props.dispatch(getBillsList())
     }
-    handleSubmit= (data)=>{
-        this.props.dispatch(startAddBill(data))
-    }
 
     render(){
         return (
             <Fragment>
-                {/* <BillForm handleSubmit={this.handleSubmit}/> */}
                 <Grid container spacing={8}> 
                     <Grid item xs={9} zeroMinWidth>
                         <h2>Add Bills</h2>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useMemo } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import { object, string, ref, number, array } from 'yup'
@@ -74,6 +74,7 @@ function FormBill(props) {
   }
   useEffect(() => {
     props.dispatch(getStocksList())
+    // eslint-disable-next-line
   }, [])
 
   const productChange = (e, values, setFieldValue) => {
