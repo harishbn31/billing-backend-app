@@ -615,10 +615,10 @@ function FormPurchase(props) {
                     </Fragment>
                   )}
                 </div>
-                <pre>{JSON.stringify(values, null, 4)}</pre>
+                {/* <pre>{JSON.stringify(values, null, 4)}</pre>
                 <pre>{JSON.stringify(isSubmitting, null, 4)}</pre>
                 <pre>{JSON.stringify(errors, null, 4)}</pre>
-                <pre>{JSON.stringify(isValid, null, 4)}</pre>
+                <pre>{JSON.stringify(isValid, null, 4)}</pre> */}
               </Form>
             </div>
           </Fragment>

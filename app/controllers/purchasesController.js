@@ -2,10 +2,10 @@ const Purchase = require('../models/Purachse')
 const Product = require('../models/Product')
 const Stock = require('../models/Stock')
 const _ = require('lodash')
-const { findOneAndUpdate } = require('../models/Stock')
 
 module.exports.list = (req, res) => {
     Purchase.find().populate('dealer').populate('products.product')
+        .sort({createdAt: 'desc'})
         .then(purchases => {
             res.json(purchases)
         })
