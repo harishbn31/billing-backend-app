@@ -45,6 +45,9 @@ function printPageArea(areaID){
   WinPrint.document.close();
   WinPrint.focus();
   WinPrint.print();
+  setTimeout(() => {
+        WinPrint.close();
+    }, 3000);
 }
 
 function downloadAsPdf(areaID,id){
@@ -54,7 +57,7 @@ function downloadAsPdf(areaID,id){
       filename:     `invoice-${id}.pdf`,
       image:        { type: 'jpeg', quality: 1 },
       html2canvas:  { scale: 4 },
-      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+      jsPDF:        { unit: 'cm', format: 'A4', orientation: 'portrait' }
   };
   html2pdf().set(opt).from(printContent).save()
 }
