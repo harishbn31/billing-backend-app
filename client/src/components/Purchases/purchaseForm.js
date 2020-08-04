@@ -1,7 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import Add from '@material-ui/icons/Add'
-// import Select from 'react-select';
 
 class PurchaseForm extends React.Component {
   constructor(props) {
@@ -313,7 +311,7 @@ class PurchaseForm extends React.Component {
                     {this.props.dealers.map((dealer) => {
                       return (
                         <option key={dealer._id} value={dealer._id}>
-                          {dealer.username}
+                          {dealer.dealerName}
                         </option>
                       )
                     })}
@@ -433,7 +431,7 @@ class PurchaseForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
-    dealers: state.users,
+    dealers: state.dealers,
   }
 }
 

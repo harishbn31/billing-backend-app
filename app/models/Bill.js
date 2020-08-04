@@ -26,7 +26,7 @@ const billSchema = new Schema({
     }],
     billId:{
         type: String,
-        default: `Invoice-${alphanumeric(7)}-(${moment(Date.now()).format('YYYY-MM-DD')})`
+        default: `OrderID-[${alphanumeric(7).toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
     },
     date: {
         type: Date,

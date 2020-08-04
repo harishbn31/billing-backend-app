@@ -16,7 +16,7 @@ import PurchaseShow from './components/Purchases/showPurchase'
 import ReportList from './components/Reports/ReportList'
 import CategoriesList from './components/Categories/CategoriesList'
 import ProductsList from './components/Products/ProductsList'
-import DealersList from './components/AllUsers/Dealers'
+import Dealers from './components/AllUsers/Dealers/Dealers'
 import EmployeesList from './components/AllUsers/Employees/Employees'
 import StocksList from './components/Stocks/stockList'
 import ExpenseList from './components/Expenses/expensesList'
@@ -44,7 +44,7 @@ function App() {
       <Route path="/purchases/:id" component={PurchaseShow} exact={true}/>
       <Route path="/categories" component={CategoriesList} />
       <Route path="/products" component={ProductsList} />
-      <Route path="/dealers" component={DealersList} />
+      <Route path="/dealers" component={Dealers} />
       <Route path="/employees" component={EmployeesList} />
       <Route path="/stocks" component={StocksList} />
       <Route path="/reports" component={ReportList} />

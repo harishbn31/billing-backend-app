@@ -1,5 +1,5 @@
 const CustomerProfile = require('../models/CustomerProfile')
-const Bill = require('../models/Bill')
+//const Bill = require('../models/Bill')
 const customersController = {}
 
 customersController.list = (req,res) => {
@@ -35,16 +35,16 @@ customersController.update = (req,res) => {
         }).catch(err => res.json(err))
 }
 
-customersController.show = (req,res) => {
-    const id = req.params.id
-    console.log(id,'------------->id')
-    CustomerProfile.findOne({_id:id})
-        .then(cus => {
-            Bill.find({customer: id},'createdAt products billId totalAmount')
-                .then(bill => {
-                    res.json({...cus, ...bill})
-                }).catch(err => res.json(err))
-        }).catch(err => res.json(err))
-}
+// customersController.show = (req,res) => {
+//     const id = req.params.id
+//     console.log(id,'------------->id')
+//     CustomerProfile.findOne({_id:id})
+//         .then(cus => {
+//             Bill.find({customer: id},'createdAt products billId totalAmount')
+//                 .then(bill => {
+//                     res.json({...cus, ...bill})
+//                 }).catch(err => res.json(err))
+//         }).catch(err => res.json(err))
+// }
 
 module.exports = customersController

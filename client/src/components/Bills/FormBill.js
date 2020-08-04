@@ -20,7 +20,7 @@ import {
 import moment from 'moment'
 import CustomerAdd from '../AllUsers/Customers/CustomerAdd'
 import { getStocksList } from './../../actions/stock'
-import './FormBill.css'
+import '../../config/FormikForm.css'
 import { startAddBill } from '../../actions/bill'
 
 const registerSchema = object().shape({
@@ -97,6 +97,7 @@ function FormBill(props) {
   }
   const addToBillList = (e,values,setFieldValue) => {
     e.preventDefault()
+    console.log(values,setFieldValue)
     if (values._id) {
       setFieldValue('products',values.products.concat({
         product: values._id,
@@ -118,7 +119,6 @@ function FormBill(props) {
     }
   }
   const handleRemoveProduct = (id,values,setFieldValue) => {
-    //console.log(id,values.product)
     const product = values.products.find(p => p.product === id)
     setFieldValue('total',values.total - product.price * product.quantity)
     setFieldValue('totalAmount',values.totalAmount - product.price * product.quantity)
@@ -528,9 +528,9 @@ function FormBill(props) {
                                   color='primary'
                                   type='submit'
                                   //className='btn-register'
-                                  disabled={isSubmitting || !isValid}
+                                  disabled={isSubmitting}
                                   className='formik-formBill-submit-btn' 
-                                >Make Bill</Button>
+                                >Bill</Button>
                           </div>
                       </Fragment>
                     )

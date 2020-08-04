@@ -10,6 +10,7 @@ import {getUsersList} from './actions/allUsers'
 import {getPurchasesList} from './actions/purchase'
 import { startListEmployees } from './actions/employee'
 import { startListCustomers } from './actions/customer'
+import { startListDealers } from './actions/dealer'
 
 const store = configureStore()
 
@@ -26,6 +27,7 @@ store.dispatch(getPurchasesList())
 store.dispatch(getUsersList())
 store.dispatch(startListEmployees())
 store.dispatch(startListCustomers())
+store.dispatch(startListDealers())
 
 const jsx = (
     <Provider store={store}>

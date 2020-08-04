@@ -35,7 +35,7 @@ export const getPurchasesList = () => {
             })
     }
 }
-export const startAddPurchase = (data) => {
+export const startAddPurchase = (data,regEnable) => {
     return (dispatch) => {
         axios.post('/purchases',data)
             .then(response => {
@@ -43,16 +43,15 @@ export const startAddPurchase = (data) => {
                 if(response.data.errors){
                     Swal.fire({
                         type: 'info',
-                        text: "Check the fileds"
+                        text: "Check the fields"
                     })
                 }else{
                     const purchase = response.data;
-                    dispatch(addPurchase(purchase));
+                    // console.log(purchase,'<----[NEW PURCHASE]')
+                    dispatch(addPurchase(purchase))
+                    regEnable()
                     dispatch(startListProducts())
                     purchase.products.map( product => {
-                        // const data = {};
-                        // data.quantity = product.quantity;
-                        //dispatch(UpdateStockQtyPurchase(product.stock, data))
                         dispatch(updateStockFromPurchase(product))
                         return null
                     })

@@ -72,11 +72,14 @@ module.exports.create = async(req, res) => {
     body.products = dataPack
     const purchase = new Purchase(body)
     purchase.save()
-    purchase.populate('products.product')
         .then(purchase => {
             //console.log('purchase ',purchase)
-            res.json(purchase)
-        }).catch(error=> res.send(error))
+            purchase.populate('products.product').execPopulate()
+                .then(populatedPurchase => {
+                    console.log(populatedPurchase)
+                    res.json(populatedPurchase)
+                })
+        }).catch(error=> res.json(error))
 }
 
 module.exports.show = (req, res) => {
@@ -84,7 +87,7 @@ module.exports.show = (req, res) => {
     Purchase.findOne({"_id":id})
         .then(purchase => {
             res.json(purchase)
-        }).catch(error=> res.send(error))
+        }).catch(error=> res.json(error))
 }
 module.exports.update = (req, res) => {
     const id= req.params.id
@@ -92,7 +95,7 @@ module.exports.update = (req, res) => {
     Purchase.findByIdAndUpdate(id,body,{new:true})
         .then(purchase => {
             res.json(purchase)
-        }).catch(error=> res.send(error))
+        }).catch(error=> res.json(error))
 }
 module.exports.delete = (req, res) => {
     const id = req.params.id
