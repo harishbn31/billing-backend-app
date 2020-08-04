@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const moment = require('moment')
-const alphanumeric = require('alphanumeric-id')
+const shortid = require('shortid')
 // const validator = require('validator')
 
 const Schema = mongoose.Schema
@@ -26,7 +26,7 @@ const billSchema = new Schema({
     }],
     billId:{
         type: String,
-        default: `OrderID-[${alphanumeric(7).toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
+        default: `OrderID-[${shortid.generate().toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
     },
     date: {
         type: Date,

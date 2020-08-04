@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Stock = require('./Stock')
 const moment = require('moment')
-const alphanumeric = require('alphanumeric-id')
+const shortid = require('shortid')
 // const validator = require('validator')
 
 const Schema = mongoose.Schema
@@ -36,7 +36,7 @@ const purchaseSchema = new Schema({
     },
     invoice:{
         type: String,
-        default: `InvoiceID-[${alphanumeric(7).toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
+        default: `InvoiceID-[${shortid.generate().toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
     },
     total: {
         type: Number,
