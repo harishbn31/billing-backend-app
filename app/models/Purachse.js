@@ -36,7 +36,7 @@ const purchaseSchema = new Schema({
     },
     invoice:{
         type: String,
-        default: `InvoiceId-[${alphanumeric(7).toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
+        default: `InvoiceID-[${alphanumeric(7).toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
     },
     total: {
         type: Number,
