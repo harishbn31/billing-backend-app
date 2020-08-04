@@ -4,7 +4,7 @@ const purchaseReducer = (state = [], action) => {
             return [...action.payload]
         }
         case 'ADD_PURCHASE': {
-            return state.concat(action.payload)
+            return [action.payload].concat(state)
         }
         default: {
             return state

@@ -47,7 +47,7 @@ function printPageArea(areaID){
   WinPrint.print();
   setTimeout(() => {
         WinPrint.close();
-    }, 3000);
+    }, 2000);
 }
 
 function downloadAsPdf(areaID,id){
