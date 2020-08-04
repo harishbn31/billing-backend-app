@@ -69,11 +69,11 @@ export const UpdateStockQtyPurchase = (id,data,history) => {
     return (dispatch) => {
         axios.get(`/stocks/${id}`)
         .then(response => {
-            console.log(response)
+            //console.log(response)
            return response.data
         })
         .then(stock => {
-            console.log('stock value', stock);
+            //console.log('stock value', stock);
             data.quantity += stock.quantity;
             axios.put(`/stocks/edit/${id}`,data,{
                 headers: {
@@ -87,7 +87,7 @@ export const UpdateStockQtyPurchase = (id,data,history) => {
                         text: "Check the fileds"
                     })
                 }else{
-                    console.log("called", res.data);
+                    //console.log("called", res.data);
                     dispatch(updateStock(res.data._id,res.data))
                     // history.push('/stocks')
                     // window.location.reload()
@@ -110,11 +110,11 @@ export const UpdateStockQtySell = (id,data,history) => {
     return (dispatch) => {
         axios.get(`/stocks/${id}`)
         .then(response => {
-            console.log(response)
+            //console.log(response)
            return response.data
         })
         .then(stock => {
-            console.log('stock value', stock);
+            //console.log('stock value', stock);
             data.quantity = stock.quantity - data.quantity;
             axios.put(`/stocks/edit/${id}`,data,{
                 headers: {
@@ -128,7 +128,7 @@ export const UpdateStockQtySell = (id,data,history) => {
                         text: "Check the fileds"
                     })
                 }else{
-                    console.log("called", res.data);
+                    //console.log("called", res.data);
                     dispatch(updateStock(res.data))
                     // history.push('/stocks')
                     // window.location.reload()

@@ -117,7 +117,7 @@ function FormBill(props) {
     }
   }
   const handleRemoveProduct = (id,values,setFieldValue) => {
-    console.log(id,values.product)
+    //console.log(id,values.product)
     const product = values.products.find(p => p.product === id)
     setFieldValue('total',values.total - product.price * product.quantity)
     setFieldValue('totalAmount',values.totalAmount - product.price * product.quantity)
@@ -199,7 +199,7 @@ function FormBill(props) {
               discount,
               totalAmount,
           }
-          console.log(fd, setSubmitting)
+          //console.log(fd, setSubmitting)
           props.dispatch(startAddBill(fd,regEnable))
         }}
       >
@@ -535,10 +535,10 @@ function FormBill(props) {
                     )
                   }
                 </div>
-                <pre>{JSON.stringify(values, null, 4)}</pre>
+                {/* <pre>{JSON.stringify(values, null, 4)}</pre>
                 <pre>{JSON.stringify(isSubmitting, null, 4)}</pre>
                 <pre>{JSON.stringify(errors, null, 4)}</pre>
-                <pre>{JSON.stringify(isValid, null, 4)}</pre>
+                <pre>{JSON.stringify(isValid, null, 4)}</pre> */}
               </Form>
             </div>
           </Fragment>
@@ -549,7 +549,6 @@ function FormBill(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     products: state.products,
     customers: state.customers,
