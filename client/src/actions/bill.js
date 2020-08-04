@@ -27,7 +27,7 @@ export const getBillsList = () => {
             })
     }
 }
-export const startAddBill = (data) => {
+export const startAddBill = (data,regEnable) => {
     return (dispatch) => {
         axios.post('/bills',data)
             .then(response => {
@@ -40,6 +40,7 @@ export const startAddBill = (data) => {
                 }else{
                     const bill = response.data;
                     dispatch(addBill(bill))
+                    regEnable()
                     bill.products.map( product => {
                         const data = {};
                         data.quantity = product.quantity;

@@ -4,7 +4,7 @@ const billReducer = (state = [], action) => {
             return [...action.payload]
         }
         case 'ADD_BILL': {
-            return [...state, action.payload]
+            return [action.payload].concat(state)
         }
         default: {
             return state

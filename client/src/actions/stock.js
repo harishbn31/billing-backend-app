@@ -11,9 +11,9 @@ const addStock = (stock)=>{
         type: 'ADD_STOCK',payload: stock
     }
 }
-const updateStock = (id,stock)=>{
+const updateStock = (data)=>{
     return {
-        type: 'UPDATE_STOCK',payload: {id,stock}
+        type: 'UPDATE_STOCK',payload: data
     }
 }
 const removeStock = (id)=>{
@@ -129,7 +129,7 @@ export const UpdateStockQtySell = (id,data,history) => {
                     })
                 }else{
                     console.log("called", res.data);
-                    dispatch(updateStock(res.data._id,res.data))
+                    dispatch(updateStock(res.data))
                     // history.push('/stocks')
                     // window.location.reload()
                 }

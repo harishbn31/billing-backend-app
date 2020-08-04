@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {connect} from 'react-redux'
 import {getBillsList,startAddBill} from '../../actions/bill'
 import BillForm from './billsForm'
 import { Link } from 'react-router-dom'
+import FormBill from './FormBill'
+import { Grid } from '@material-ui/core'
 
 
 class BillList extends React.Component {
@@ -14,25 +16,30 @@ class BillList extends React.Component {
     }
 
     render(){
-        // console.log(this.props.customers)
         return (
-            <>
-            <h2>Add Bills</h2>
-            {/* <div className="col-md-8"> */}
-            <BillForm handleSubmit={this.handleSubmit}/>
-            {/* </div> */}
-                <h2>Bills </h2>
-                <div className="row">
-                <ul className="list-group">
-                    {this.props.bills.map((bill,index) => {
-                        return <Link key={index} to={`/invoices/${bill._id}`}><li className="list-group-item">{bill.billId}</li></Link>
-                    })}
-                </ul>
-                </div>
-            </>
+            <Fragment>
+                {/* <BillForm handleSubmit={this.handleSubmit}/> */}
+                <Grid container spacing={8}> 
+                    <Grid item xs={9} zeroMinWidth>
+                        <h2>Add Bills</h2>
+                        <FormBill />
+                    </Grid>
+                    <Grid item xs={3} zeroMinWidth>
+                            <h2>Bills </h2>
+                            <div className="row">
+                            <ul className="list-group">
+                                {this.props.bills.map((bill,index) => {
+                                    return <Link key={index} to={`/invoices/${bill._id}`}><li className="list-group-item">{bill.billId}</li></Link>
+                                })}
+                            </ul>
+                            </div>
+                    </Grid>  
+                </Grid>
+            </Fragment>
         )
     }
 }
+
 
 const mapStateToProps = (state) => {
     return {

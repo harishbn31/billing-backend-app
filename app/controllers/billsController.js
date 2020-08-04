@@ -3,6 +3,7 @@ const _ = require('lodash')
 
 module.exports.list = (req, res) => {
     Bill.find()
+        .sort({createdAt: 'desc'})
         .populate('products.product products.stock customer')
         .then(bills => {
             res.json(bills)

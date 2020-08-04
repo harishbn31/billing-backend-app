@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
+const alphanumeric = require('alphanumeric-id')
 // const validator = require('validator')
 
 const Schema = mongoose.Schema
@@ -24,7 +26,7 @@ const billSchema = new Schema({
     }],
     billId:{
         type: String,
-        default: `Expo-bill-${Date.now()}`
+        default: `Invoice-${alphanumeric(7)}-(${moment(Date.now()).format('YYYY-MM-DD')})`
     },
     date: {
         type: Date,

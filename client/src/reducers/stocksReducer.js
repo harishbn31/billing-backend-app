@@ -16,6 +16,16 @@ const stockReducer = (state = [], action) => {
                 }
             })
         }
+        case "UPDATE_STOCK": {
+            return state.map(stock => {
+                if(stock._id === action.payload._id){
+                    return Object.assign({}, stock, action.payload)
+                }
+                else{
+                    return Object.assign({}, stock)
+                }
+            })
+        }
         default: {
             return state
         }

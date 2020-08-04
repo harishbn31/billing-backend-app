@@ -27,6 +27,7 @@ module.exports.update = (req, res) => {
     const id= req.params.id
     const body= req.body
     Stock.findByIdAndUpdate(id,body,{new:true})
+        .populate('product')
         .then(stock => {
             res.json(stock)
         }).catch(error=> res.send(error))
