@@ -3,7 +3,7 @@ const URL = window.location.origin.includes('localhost') ? "http://localhost:300
 const axios = Axios.create({
     baseURL: URL,
     headers: {
-        "x-auth": localStorage.getItem('authToken')
+        "x-auth": localStorage.getItem('authToken') ? localStorage.getItem('authToken') : ""
     }
 })
 
