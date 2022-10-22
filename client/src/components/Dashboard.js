@@ -11,8 +11,15 @@ import CategoryIcon from '@material-ui/icons/Category';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 function Dashboard(props) {
+    React.useEffect(()=>{
+        if(!props.user.isLoggedIn){
+            props.history.push('/')
+        }
+    }, [props.user.isLoggedIn])
 
     return (
         <>
@@ -99,5 +106,10 @@ function Dashboard(props) {
         </>
     )
 }
-
-export default Dashboard
+const mapStateToProps = (state) => {
+    // console.log('props',state.user)
+    return {
+        user: state.user
+    }
+}
+export default withRouter(connect(mapStateToProps)(Dashboard))

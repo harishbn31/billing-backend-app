@@ -44,7 +44,7 @@ class Header extends React.Component {
         return (
         <div className="header">
             
-            {this.props.location.pathname.includes('/') ?
+            {(this.props.location.pathname.includes('/') && this.props.user.isLoggedIn)  ?
              <>
              <Drawer open={this.state.drawerIsOpen} onClose={() => this.toggleDrawer(false)}>
                 <List>
@@ -132,12 +132,12 @@ class Header extends React.Component {
              </Drawer>
              <div className="logo">
                 <MenuIcon onClick={() => this.toggleDrawer(true)}/>
-                <Link to="/businesses"><h3>Expo</h3></Link>
+                <Link to="/businesses"><h3>Expolog</h3></Link>
              </div>
              </>
              :
              <div className="logo">
-                <Link to="/"><h3>Expo</h3></Link>
+                <Link to="/"><h3>Expolog Billing App</h3></Link>
             </div>
             }
             

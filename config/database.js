@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const CONNECTION_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/billingApp`
+const CONNECTION_URI = process.env.MONGODB_URI || "mongodb://0.0.0.0:27017/billingApp"
 
 const setupDB = () => {
     mongoose.connect(CONNECTION_URI, {

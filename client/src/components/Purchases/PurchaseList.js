@@ -16,11 +16,11 @@ class PurchaseList extends React.Component {
             <Fragment>
                 <Grid container spacing={8}> 
                     <Grid item xs={9} zeroMinWidth>
-                    <h2>Add Purchases</h2>
+                    <h2>New Purchases</h2>
                     <FormPurchase />
                     </Grid>
                     <Grid item xs={3} zeroMinWidth>
-                        <h2>Purchases </h2>
+                        <h2>All Purchases </h2>
                         <div className="row">
                             <ul className="list-group">
                                 {this.props.purchases.map((purchase,index) => {

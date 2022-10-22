@@ -7,7 +7,7 @@ const customerProfileSchema = new Schema({
     name:{
         type: String,
         required: true,
-        minlength: [4, 'Name must be minimum 4 character long']
+        minlength: [2, 'Name must be minimum 4 character long']
     },
     email:{
         type: String,
@@ -24,8 +24,8 @@ const customerProfileSchema = new Schema({
     phone:{
         type: String,
         required: true,
-        minlength: [10,'mobile number must be 10 characters long'],
-        maxlength: [10, 'mobile number must be 10 characters long'],
+        // minlength: [10,'mobile number must be 10 characters long'],
+        // maxlength: [10, 'mobile number must be 10 characters long'],
         validate: {
             validator: function(value){
                 return validator.isNumeric(value)

@@ -16,11 +16,11 @@ class BillList extends React.Component {
             <Fragment>
                 <Grid container spacing={8}> 
                     <Grid item xs={9} zeroMinWidth>
-                        <h2>Add Bills</h2>
+                        <h2>Add Bill</h2>
                         <FormBill />
                     </Grid>
                     <Grid item xs={3} zeroMinWidth>
-                            <h2>Bills </h2>
+                            <h2>All Bills </h2>
                             <div className="row">
                             <ul className="list-group">
                                 {this.props.bills.map((bill,index) => {

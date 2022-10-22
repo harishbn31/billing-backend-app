@@ -60,7 +60,7 @@ class StocksList extends React.Component {
         console.log(stocks,'<---stock',products)
         return (
             <>
-                <h3>Stocks </h3>
+                <h3>All Stocks</h3>
                 <div className="row">
                     {stocks.length>0 && stocks.map((stock,index) => {
                         return <div key={index}> 

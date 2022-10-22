@@ -3,10 +3,7 @@ import React from 'react'
 function Footer() {
     return (
         <div className="footer">
-            <strong>Head</strong>
-            <br/>
-            Links here,
-            if any
+            <strong>Copyrights <span>&copy;</span> Expolog Technologies</strong>
         </div>
     )
 }

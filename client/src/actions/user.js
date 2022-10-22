@@ -73,9 +73,8 @@ export const startPostUserLogout = (formData) => {
     return dispatch => {
         axios.delete('/users/logout', formData)
             .then(() => {
-                localStorage.clear()
                 dispatch(logoutUser())
-                dispatch({type: 'LOGOUT'})
+                localStorage.clear()
             })
             .catch(err => {
                 console.log('Logout error', err)

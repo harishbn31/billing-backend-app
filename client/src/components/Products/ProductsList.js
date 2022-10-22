@@ -105,7 +105,7 @@ class ProductList extends React.Component {
         <IconButton className='tableButton' onClick={this.modalOpen}>
           <Add />
         </IconButton>
-        <h3>Products </h3>
+        <h3>All Products </h3>
         <div className='row'>
           {this.props.products.map((product, index) => {
             // return <li key={index}> {product.name}</li>

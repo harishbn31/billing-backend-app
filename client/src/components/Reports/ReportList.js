@@ -4,7 +4,7 @@ function ReportList(props) {
 
     return (
         <>
-            <h1>Reports</h1>
+            <h1>All Reports</h1>
             <h4>Generate Report</h4>
             <div className='report-date-picker' >
                 <div className='col'>

@@ -106,7 +106,7 @@ class CategoriesList extends React.Component {
             <IconButton className='tableButton' onClick={this.modalOpen}>
                 <Add />
             </IconButton>
-                <h3>Categories </h3>
+                <h3>All Categories </h3>
                 <div className="row">
 
                 

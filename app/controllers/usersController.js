@@ -59,7 +59,7 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.checkLoginStatus = (req, res) => {
-    // console.log(req.user)
+    console.log('check1111111',req.user)
     if (req.user) res.send(_.pick(req.user, ['username',"role"]))
 }
 
