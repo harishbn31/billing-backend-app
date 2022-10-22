@@ -1,10 +1,14 @@
 import React from 'react'
+import axios from '../../config/axios'
 
 function ReportList(props) {
 
+    const handleClick = (e)=>{
+        e.preventDefault()
+        console.log("check11111")
+    }
     return (
         <>
-            <h1>All Reports</h1>
             <h4>Generate Report</h4>
             <div className='report-date-picker' >
                 <div className='col'>
@@ -38,7 +42,7 @@ function ReportList(props) {
             <div>
 
             </div>
-            <button>Generate Report</button>
+            <button onClick={handleClick}>Generate Report</button>
         </>
     )
 }

@@ -145,8 +145,8 @@ class Header extends React.Component {
                 {
                     this.props.user.isLoggedIn ? 
                     <div className="headerLinks">
-                    <Link to ="/">Details</Link>
-                    <Link to ="/user">Settings</Link>
+                    <Link to ="/dashboard">Dashboard</Link>
+                    {/* <Link to ="/user">Settings</Link> */}
                     <Link to ="/" onClick={() => {this.props.dispatch(startPostUserLogout())}}>Logout</Link>
                     </div>
                     :

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import Header from './components/statics/Header'
 import Home from './components/statics/Home'
 
@@ -26,14 +26,21 @@ import BillShow from './components/Bills/showBill'
 import BillList from './components/Bills/billList'
 import Customers from './components/AllUsers/Customers/Customers'
 import FormBill from './components/Bills/FormBill'
+import {startCheckUserAuth} from './actions/user'
 
 
 function App(props) {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    if(!localStorage.getItem('authToken')){
+      dispatch(startCheckUserAuth())
+    }
+  },[])
   return (
     <BrowserRouter>
       <CssBaseline />
       <Header/>
-      <div style={{marginLeft: '10rem'}}>
+      <div className='container'>
         <Switch>
           <Route path="/" component={Home} exact/>
           <Route path="/login" component={Login} />
