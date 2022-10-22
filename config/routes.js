@@ -16,6 +16,7 @@ const stocksController= require('../app/controllers/stocksController')
 const employeesController= require('../app/controllers/employeesController')
 const customersController= require('../app/controllers/customersController')
 const dealersController= require('../app/controllers/dealersController')
+const reportsController = require('../app/controllers/reportsController')
 
 
 router.get('/users', usersController.list)
@@ -86,6 +87,8 @@ router.post('/dealers', dealersController.create)
 router.put('/dealers/edit/:id', dealersController.update)
 //router.get('/dealers/:id', dealersController.show)
 router.delete('/dealers/:id', dealersController.delete)
+
+router.get('/reports', reportsController.list)
 
 
 
