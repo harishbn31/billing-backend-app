@@ -1,4 +1,4 @@
-const stockReducer = (state = [], action) => {
+const reportReducers = (state = [], action) => {
     switch(action.type) {
         case 'REPORT_LIST': {
             return [...action.payload]
