@@ -1,11 +1,27 @@
-import React from 'react'
-import axios from '../../config/axios'
+import React, {useEffect, useState} from 'react'
+import {getReportsList} from '../../actions/report'
+import { connect } from 'react-redux'
+
 
 function ReportList(props) {
-
+    const [startDate, setStartDate] = useState(new Date().toLocaleString())
+    const [endDate, setEndDate] = useState(new Date().toLocaleString())
     const handleClick = (e)=>{
+        console.log("check3333333")
         e.preventDefault()
-        console.log("check11111")
+        const dates = {
+            startDate: startDate,
+            endDate: endDate
+        }
+        props.dispatch(getReportsList(dates))
+    }
+    const dateChange= (e)=>{
+        if(e.target.id === 'startDate'){
+            setStartDate(e.target.value)
+        }else{
+            setEndDate(e.target.value)
+        }
+        
     }
     return (
         <>
@@ -20,8 +36,8 @@ function ReportList(props) {
                         placeholder='Date'
                         type='date'
                         style={{width: '250px'}}
-                        //value={startDate}
-                        //onChange={this.handleChange}
+                        value={startDate}
+                        onChange={dateChange}
                     />
                 </div>
                 <br/>
@@ -34,17 +50,21 @@ function ReportList(props) {
                         placeholder='Date'
                         type='date'
                         style={{width: '250px'}}
-                        //value={endDate}
-                        //onChange={this.handleChange}
+                        value={endDate}
+                        onChange={dateChange}
                     />
                 </div>
             </div>
             <div>
 
             </div>
-            <button onClick={handleClick}>Generate Report</button>
+            <button onClick={(e)=>handleClick(e)}>Generate Report</button>
         </>
     )
 }
-
-export default ReportList
+const mapStateToProps = (state) => {
+    return {
+      reports: state.reports
+    }
+  }
+export default connect(mapStateToProps)(ReportList)

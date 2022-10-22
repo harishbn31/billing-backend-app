@@ -12,6 +12,7 @@ import billReducer from '../reducers/billReducer'
 import employeesReducer from '../reducers/employeesReducer.js'
 import customersReducer from '../reducers/customersReducer.js'
 import dealersReducer from '../reducers/dealersReducer.js'
+import reportReducers from '../reducers/reportReducers'
 
 const appReducer = combineReducers({
     user: userReducer,
@@ -25,7 +26,8 @@ const appReducer = combineReducers({
     bills: billReducer,
     employees: employeesReducer,
     customers: customersReducer,
-    dealers: dealersReducer
+    dealers: dealersReducer,
+    reports: reportReducers
 })
 
 export const rootReducer = (state, action) => {

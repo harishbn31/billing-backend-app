@@ -88,7 +88,7 @@ router.put('/dealers/edit/:id', dealersController.update)
 //router.get('/dealers/:id', dealersController.show)
 router.delete('/dealers/:id', dealersController.delete)
 
-router.get('/reports', reportsController.list)
+router.post('/reports', reportsController.getReports)
 
 
 

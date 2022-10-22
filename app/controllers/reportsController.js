@@ -3,14 +3,19 @@ const Purchase = require('../models/Purachse')
 
 const _ = require('lodash')
 
-module.exports.list = (req, res) => {
-    console.log(req.query)
-    Bill.find({"createdAt": {"$gte": new Date(req.query.date), "$lt": Date.now()}}).populate('customer')
+module.exports.getReports = (req, res) => {
+    // console.log('check2222222',req.body)
+    // Bill.find({'cretaedAt': {
+    //     $gte: req.body.startDate,
+    //     $lte:  req.body.endDate
+    // }})
+    Bill.find()
     .then(bills => {
-        Purchase.find().populate('dealer')
-        .then(purchases => {
-            // console.log(bills,purchases)
-            res.status(200).send({bills: bills,purchases: purchases})
-        })
-    })
+        // Purchase.find()
+        // .then(purchases => {
+        //     // console.log(bills,purchases)
+        //     res.status(200).send({bills: bills,purchases: purchases})
+        // })
+        res.json(bills)
+    }).catch(err => res.json('no data'))
 }
