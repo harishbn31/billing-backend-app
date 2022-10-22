@@ -8,3 +8,4 @@ const reportReducers = (state = [], action) => {
         }
     }
 }
+export default reportReducers

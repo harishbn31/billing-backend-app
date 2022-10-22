@@ -9,6 +9,10 @@
     "dev": "concurrently \"nodemon index.js\" \" cd client && npm start\" ",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
+  "engines": {
+    "node": "10.15.1",
+    "npm": "6.4.1"
+  },
   "author": "Harish",
   "license": "ISC",
   "dependencies": {
