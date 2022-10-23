@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "concurrently \"nodemon index.js\" \" cd client && npm start\" ",
-    "heroku-postbuild": "cd client && npm install && npm run react-scripts --openssl-legacy-provider build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": "10.15.1",
