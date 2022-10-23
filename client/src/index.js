@@ -28,8 +28,6 @@ if(localStorage.getItem('authToken')){
     store.dispatch(startListEmployees())
     store.dispatch(startListCustomers())
     store.dispatch(startListDealers())
-}else{
-    store.dispatch(startCheckUserAuth())
 }
 
 const jsx = (

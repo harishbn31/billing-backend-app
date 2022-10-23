@@ -54,7 +54,7 @@ export const startAddProduct = (data) => {
             }else{
                 const product = res.data;
                 dispatch(addProduct(product))
-                console.log('dsasd', product);
+                // console.log('dsasd', product);
                 const stock = {}
                 stock.product = product._id;
                 stock.quantity = 0;
@@ -87,7 +87,7 @@ export const startUpdateProduct = (id,data,history) => {
             }else{
                 dispatch(updateProduct(res.data._id,res.data))
                 // history.push('/products')
-                window.location.reload()
+                // window.location.reload()
             }
         })
         .catch(err => {

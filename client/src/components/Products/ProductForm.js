@@ -22,8 +22,10 @@ class ProductForm extends React.Component {
             const formData = {name,description,price,category}
             if(this.state.isEdit){
                 this.props.productPut({...formData,_id: this.state._id})
+                this.props.closeModal()
             }else{
                 this.props.productPost(formData)
+                this.props.closeModal()
             }
         }
     }
@@ -51,7 +53,7 @@ class ProductForm extends React.Component {
         </select>
         <input className="form-control" name="price" placeholder="Price" type="Number" value={this.state.price}onChange={this.handleChange}
         />
-            <button className="btn btn-primary" >Submit</button>
+            <button onClick={(e)=> this.handleSubmit(e)} className="btn btn-primary form-control" >Submit</button>
             </form>
             </>
         )

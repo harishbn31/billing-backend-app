@@ -9,7 +9,10 @@ module.exports.getReports = (req, res) => {
     //     $gte: req.body.startDate,
     //     $lte:  req.body.endDate
     // }})
-    Bill.find()
+    Bill.find({createdAt: {
+        $gte: req.body.startDate, 
+        $lt: req.body.endDate
+    }}).populate('customer').populate('products.product')
     .then(bills => {
         // Purchase.find()
         // .then(purchases => {

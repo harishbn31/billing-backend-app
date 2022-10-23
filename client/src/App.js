@@ -34,6 +34,8 @@ function App(props) {
   useEffect(()=>{
     if(!localStorage.getItem('authToken')){
       dispatch(startCheckUserAuth())
+      // console.log(window.location.hash)
+      // props.history.push(window.location.pathname)
     }
   },[])
   return (
@@ -42,10 +44,10 @@ function App(props) {
       <Header/>
       <div className='container'>
         <Switch>
-          <Route path="/" component={Home} exact/>
+          {/* <Route path="/" component={Home} exact/> */}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          {!props.user.isLoggedIn ? <Redirect to={'/'}></Redirect> :
+          {props.user.isLoggedIn &&
           <>
           <Route path="/" component={Home} exact/>
           <Route path="/dashboard" component={Dashboard} />

@@ -100,7 +100,7 @@ class ProductList extends React.Component {
           aria-labelledBy='Create Product'
           aria-describedBy='simple-modal-description'
         >
-          <ProductForm productPost={this.productPost} />
+          <ProductForm productPost={this.productPost} isOpen={modalIsOpen} closeModal={this.closeModal} />
         </Modal>
         <IconButton className='tableButton' onClick={this.modalOpen}>
           <Add />
@@ -118,6 +118,7 @@ class ProductList extends React.Component {
                         productPut={this.updateProduct}
                         isEdit={this.state.isEdit}
                         {...product}
+                        isOpen={this.state.modalIsOpen} closeModal={this.closeModal}
                       />
                     ) : (
                       <div className='product-card'>

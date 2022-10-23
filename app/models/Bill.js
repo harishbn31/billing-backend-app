@@ -26,7 +26,7 @@ const billSchema = new Schema({
     }],
     billId:{
         type: String,
-        default: `OrderID-[${shortid.generate().toUpperCase()}]-${moment(Date.now()).format('YYYY-MM-DD')}`
+        default: `${shortid.generate().toUpperCase()}]-${moment(Date.now())}`
     },
     date: {
         type: Date,
